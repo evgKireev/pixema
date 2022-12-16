@@ -1,0 +1,77 @@
+@import '../../scss/vars';
+
+.wrapper {
+  position: relative;
+}
+
+.inner {
+  z-index: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 267px;
+}
+
+.card {
+  width: 56px;
+  height: 56px;
+  background-color: $acsent;
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.svg {
+  width: 24px;
+  height: 24px;
+  color: #fff;
+}
+
+.user {
+  color: #fff;
+  font-weight: 600;
+  margin-left: 20px;
+}
+
+.arrow {
+  color: #fff;
+  position: absolute;
+  right: 1px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  &:hover {
+    color: $acsent;
+  }
+}
+
+.userActiveInner {
+  opacity: 0;
+  transform: translateY(-75px);
+  transition: all 0.9s;
+  position: absolute;
+  top: 75px;
+  width: 267px;
+  background-color: #242426;
+  color: #fff;
+  font-weight: 500;
+  border-radius: 10px;
+}
+
+.item {
+  padding: 17px 20px 15px 20px;
+  border-bottom: 1px solid #323537;
+  cursor: pointer;
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.active {
+  color: $acsent;
+}
+
+.blockModal {
+  opacity: 100%;
+  transform: translateY(0);
+  transition: all 0.9s;
+}

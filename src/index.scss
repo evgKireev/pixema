@@ -1,5 +1,9 @@
 @import 'scss/vars';
 @import 'scss/media';
+html {
+  box-sizing: border-box;
+}
+
 *,
 *::after,
 *::before {
@@ -20,8 +24,7 @@ h5,
 h6,
 p,
 ul,
-ol,
-li,
+ol li,
 figure,
 figcaption,
 blockquote,
@@ -35,6 +38,7 @@ ul {
 }
 
 img {
+  max-width: 100%;
   display: block;
 }
 
@@ -48,6 +52,3 @@ select {
 a {
   text-decoration: none;
 }
-
-
-

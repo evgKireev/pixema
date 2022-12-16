@@ -1,0 +1,37 @@
+@import '../../scss/vars';
+
+.wrapper {
+  position: relative;
+  flex-basis: 1184px;
+}
+
+.input {
+  width: 100%;
+  background-color: $bgLite;
+  border-radius: 10px;
+  padding: 16px 50px 16px 20px;
+  border: none;
+  outline: none;
+  font-weight: 500;
+  &::placeholder {
+    color: $grey;
+  }
+  &:focus {
+    color: #fff;
+    border: 2px solid $acsent;
+  }
+}
+
+.svg {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.disabled {
+  background-color: $grey;
+  pointer-events: none;
+  &::placeholder {
+    color: $disabled;
+  }
+}
