@@ -29,7 +29,11 @@ const User = () => {
     <div className={styles.wrapper}>
       <div className={styles.inner}>
         <div className={styles.card}>
-          <FiUser className={styles.svg} />
+          {registerUser ? (
+            <h3 style={{ color: 'white' }}>AA</h3>
+          ) : (
+            <FiUser className={styles.svg} />
+          )}
         </div>
         <div className={styles.user}>
           {registerUser ? 'User name' : 'Sign in'}

@@ -7,10 +7,11 @@
 
 .input {
   width: 100%;
+  height: 56px;
   background-color: $bgLite;
   border-radius: 10px;
   padding: 16px 50px 16px 20px;
-  border: none;
+  border: 1px solid transparent;
   outline: none;
   font-weight: 500;
   &::placeholder {

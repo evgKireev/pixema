@@ -1,0 +1,33 @@
+@import '../../scss/vars';
+
+.item {
+  color: $grey;
+  display: flex;
+  gap: 20px;
+  margin-bottom: 40px;
+  transition: all 0.5s;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  &:hover {
+    color: $acsentLite;
+    transition: all 0.5s;
+  }
+}
+.li {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.icon {
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.active {
+  color: $acsent;
+}
