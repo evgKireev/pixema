@@ -1,6 +1,7 @@
+import Card from './components/Card';
 import Categories from './components/Categories';
+import Footer from './components/Footer';
 import Header from './components/Header';
-import User from './components/User';
 import './scss/app.scss';
 
 const App = () => {
@@ -8,6 +9,7 @@ const App = () => {
     <div className="conatiner">
       <Header />
       <Categories />
+      <Footer />
     </div>
   );
 };

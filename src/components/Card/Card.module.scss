@@ -1,0 +1,49 @@
+@import '../../scss/vars';
+.card {
+  width: 266px;
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+  gap: 2px 20px;
+  flex-wrap: wrap;
+}
+.img {
+  width: 266px;
+  height: 357px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  img {
+    object-fit: cover;
+  }
+}
+
+.title {
+  font-weight: 700;
+  line-height: 24px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.5s;
+
+  &:hover {
+    color: $acsent;
+    transition: all 0.5s;
+  }
+}
+
+.genre {
+  font-weight: 500;
+  line-height: 24px;
+  color: #afb2b6;
+  position: relative;
+  &::after {
+    content: '.';
+    position: absolute;
+    font-size: 28px;
+    color: #afb2b6;
+    right: -10px;
+    top: -5px;
+  }
+}
