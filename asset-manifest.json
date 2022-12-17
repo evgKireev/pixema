@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/pixema/static/css/main.94ca972a.css",
+    "main.js": "/pixema/static/js/main.f336a586.js",
+    "index.html": "/pixema/index.html",
+    "main.94ca972a.css.map": "/pixema/static/css/main.94ca972a.css.map",
+    "main.f336a586.js.map": "/pixema/static/js/main.f336a586.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.94ca972a.css",
+    "static/js/main.f336a586.js"
+  ]
+}
