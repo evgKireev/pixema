@@ -71,6 +71,7 @@
 }
 
 .blockModal {
+  z-index: 1;
   opacity: 100%;
   transform: translateY(0);
   transition: all 0.9s;

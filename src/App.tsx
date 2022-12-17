@@ -1,15 +1,18 @@
-import Card from './components/Card';
-import Categories from './components/Categories';
-import Footer from './components/Footer';
-import Header from './components/Header';
+import { Route, Routes } from 'react-router-dom';
+import Main from './components/Main';
+import NoFaund from './components/NoFaund';
+import Home from './pages/Home/Home';
 import './scss/app.scss';
 
 const App = () => {
   return (
     <div className="conatiner">
-      <Header />
-      <Categories />
-      <Footer />
+      <Routes>
+        <Route path="/" element={<Home />}>
+          <Route index element={<Main />} />
+          <Route path="*" element={<NoFaund />} />
+        </Route>
+      </Routes>
     </div>
   );
 };

@@ -15,7 +15,7 @@ const Categories = () => {
   ];
   return (
     <>
-      <ul>
+      <ul className={styles.inner}>
         {categories.map((item, index) => (
           <div
             className={classNames(styles.item, {

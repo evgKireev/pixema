@@ -1,12 +1,23 @@
+import classNames from 'classnames';
+import { BsFillBookmarkFill } from 'react-icons/bs';
+import { AiFillFire } from 'react-icons/ai';
 import styles from './Card.module.scss';
 
 type CardType = {
   images: string;
   title: string;
   genre: string[];
+  rating: number;
+  favorites: boolean;
 };
 
-const Card: React.FC<CardType> = ({ images, title, genre }) => {
+const Card: React.FC<CardType> = ({
+  images,
+  title,
+  genre,
+  rating,
+  favorites,
+}) => {
   return (
     <div className={styles.card}>
       <div className={styles.img}>
@@ -22,6 +33,22 @@ const Card: React.FC<CardType> = ({ images, title, genre }) => {
           ))}
         </ul>
       </div>
+      <span
+        className={classNames(styles.rating, {
+          [styles.ratingOrange]: rating <= 5,
+          [styles.ratingEllow]: rating > 5 && rating <= 7,
+          [styles.ratingGreen]: rating > 7 && rating <= 8.5,
+          [styles.ratingBlue]: rating > 8.5,
+        })}
+      >
+        {rating > 8.5 ? <AiFillFire /> : ''}
+        {rating}
+      </span>
+      {favorites && (
+        <span className={styles.favorites}>
+          <BsFillBookmarkFill />
+        </span>
+      )}
     </div>
   );
 };

@@ -1,5 +1,9 @@
 @import '../../scss/vars';
 
+.inner {
+  flex-basis: 280px;
+}
+
 .item {
   color: $grey;
   display: flex;

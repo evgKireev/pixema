@@ -1,6 +1,13 @@
 @import '../../scss/vars';
 .card {
   width: 266px;
+  position: relative;
+  transition: all 0.5s;
+
+  &:hover {
+    transform: scale(1.1);
+    transition: all 0.5s;
+  }
 }
 
 .list {
@@ -44,6 +51,59 @@
     font-size: 28px;
     color: #afb2b6;
     right: -10px;
-    top: -5px;
+    top: -7px;
+  }
+}
+
+.rating {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 37px;
+  height: 28px;
+  border-radius: 6px;
+  font-weight: 600;
+  color: #fff;
+  padding: 2px 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ratingOrange {
+  background-color: #f45d2d;
+}
+.ratingEllow {
+  background-color: #f3a608;
+}
+.ratingGreen {
+  background-color: #00a340;
+}
+.ratingBlue {
+  background-color: $acsent;
+  width: 57px;
+  padding: 2px 8px 2px 11px;
+  svg {
+    width: 10px;
+    height: 15px;
+    margin-right: 7px;
+  }
+}
+
+.favorites {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 28px;
+  background-color: #323537;
+  border-radius: 6px;
+  font-weight: 600;
+  color: #fff;
+  padding: 5px 13px;
+  svg {
+    width: 13.5px;
+    height: 18px;
+    color: $acsent;
   }
 }
