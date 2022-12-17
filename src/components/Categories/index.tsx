@@ -5,13 +5,14 @@ import { BsFillBookmarkFill } from 'react-icons/bs';
 import { MdSettings } from 'react-icons/md';
 import { useState } from 'react';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 const Categories = () => {
   const [valueCategories, setValueCategories] = useState(0);
   const categories = [
-    { name: 'Home', icon: <RiHome6Fill /> },
-    { name: 'Trends', icon: <AiFillFire /> },
-    { name: 'Favorites', icon: <BsFillBookmarkFill /> },
-    { name: 'Settings', icon: <MdSettings /> },
+    { name: 'Home', icon: <RiHome6Fill />, link: '/' },
+    { name: 'Trends', icon: <AiFillFire />, link: '' },
+    { name: 'Favorites', icon: <BsFillBookmarkFill />, link: '' },
+    { name: 'Settings', icon: <MdSettings />, link: '' },
   ];
   return (
     <>
@@ -27,9 +28,11 @@ const Categories = () => {
             <div className={styles.icon} key={index}>
               {item.icon}
             </div>
-            <li className={styles.li} key={item.name}>
-              {item.name}
-            </li>
+            <Link to={item.link}>
+              <li className={styles.li} key={item.name}>
+                {item.name}
+              </li>
+            </Link>
           </div>
         ))}
       </ul>

@@ -17,6 +17,12 @@
     color: $acsentLite;
     transition: all 0.5s;
   }
+  a {
+    color: $grey;
+    &:hover {
+      color: $acsentLite;
+    }
+  }
 }
 .li {
   cursor: pointer;
@@ -34,4 +40,7 @@
 
 .active {
   color: $acsent;
+  a {
+    color: $acsent;
+  }
 }
