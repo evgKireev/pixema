@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { BsFillBookmarkFill } from 'react-icons/bs';
 import { AiFillFire } from 'react-icons/ai';
 import styles from './Card.module.scss';
+import { Link } from 'react-router-dom';
 
 type CardType = {
   images: string;
@@ -9,6 +10,7 @@ type CardType = {
   genre: string[];
   rating: number;
   favorites: boolean;
+  id: number;
 };
 
 const Card: React.FC<CardType> = ({
@@ -17,6 +19,7 @@ const Card: React.FC<CardType> = ({
   genre,
   rating,
   favorites,
+  id,
 }) => {
   return (
     <div className={styles.card}>
@@ -24,7 +27,9 @@ const Card: React.FC<CardType> = ({
         <img src={images}></img>
       </div>
       <div>
-        <h3 className={styles.title}>{title}</h3>
+        <Link to={`/one-card/${id}`}>
+          <h3 className={styles.title}>{title}</h3>
+        </Link>
         <ul className={styles.list}>
           {genre.map((value, index) => (
             <li className={styles.genre} key={index}>

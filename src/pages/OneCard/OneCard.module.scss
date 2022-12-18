@@ -1,0 +1,139 @@
+@import '../../scss/vars';
+.inner {
+  display: flex;
+  gap: 42px;
+}
+
+.images {
+  // width: 226px;
+  // height: 356px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 32px;
+  img {
+    object-fit: cover;
+  }
+}
+
+.btn {
+  border-radius: 10px;
+  background-color: $bgLite;
+  height: 56px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 56px;
+    background-color: $bg;
+  }
+  svg {
+    color: #afb2b6;
+    transition: all 0.5s;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    &:hover {
+      color: $acsent;
+      transform: scale(1.1);
+      transition: all 0.5s;
+    }
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+  gap: 2px 20px;
+  flex-wrap: wrap;
+}
+
+.genre {
+  font-weight: 500;
+  line-height: 24px;
+  position: relative;
+  &::after {
+    content: '.';
+    position: absolute;
+    font-size: 28px;
+    color: #afb2b6;
+    right: -10px;
+    top: -7px;
+  }
+}
+
+.title {
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 60px;
+  margin-bottom: 24px;
+}
+
+.label {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.rating {
+  top: 20px;
+  left: 20px;
+  width: 37px;
+  height: 28px;
+  border-radius: 6px;
+  font-weight: 600;
+  padding: 2px 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ratingOrange {
+  background-color: #f45d2d;
+}
+.ratingEllow {
+  background-color: #f3a608;
+}
+.ratingGreen {
+  background-color: #00a340;
+}
+.ratingBlue {
+  background-color: $acsent;
+  width: 57px;
+  svg {
+    width: 10px;
+    height: 15px;
+    margin-right: 7px;
+  }
+}
+
+.time {
+  background-color: $bgLite;
+  width: 85px;
+  height: 28px;
+}
+
+.text {
+  font-weight: 500;
+  max-width: 878px;
+  margin-bottom: 40px;
+}
+
+.innerList {
+  display: flex;
+  gap: 54px;
+  font-weight: 600;
+  margin-bottom: 56px;
+  li {
+    margin-bottom: 20px;
+  }
+}
+
+.recomend {
+  padding-top: 40px;
+  display: flex;
+  gap: 40px;
+}
