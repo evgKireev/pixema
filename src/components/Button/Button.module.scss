@@ -1,0 +1,32 @@
+@import '../../scss/vars';
+
+.button {
+  border-radius: 10px;
+  transition: all 0.5s;
+  font-weight: 600;
+  cursor: pointer;
+  color: #ffff;
+  padding: 16px 108px;
+}
+
+.primary {
+  background-color: $acsent;
+  &:hover {
+    background-color: $acsentLite;
+    transition: all 0.5s;
+  }
+}
+
+.secondary {
+  transition: all 0.5s;
+  background-color: #323537;
+  &:hover {
+    color: #afb2b6;
+    transition: all 0.5s;
+  }
+}
+
+.disabled {
+  background-color: #80858b;
+  pointer-events: none;
+}

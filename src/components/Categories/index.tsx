@@ -12,7 +12,7 @@ const Categories = () => {
     { name: 'Home', icon: <RiHome6Fill />, link: '/' },
     { name: 'Trends', icon: <AiFillFire />, link: '' },
     { name: 'Favorites', icon: <BsFillBookmarkFill />, link: '' },
-    { name: 'Settings', icon: <MdSettings />, link: '' },
+    { name: 'Settings', icon: <MdSettings />, link: 'settings' },
   ];
   return (
     <>

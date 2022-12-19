@@ -1,0 +1,68 @@
+.wrapper {
+  flex-basis: 1186px;
+  font-weight: 600;
+}
+
+.titile {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
+  margin-bottom: 16px;
+}
+
+.innerProfile {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 72px 40px 40px 40px;
+  background-color: #242426;
+  border-radius: 10px;
+  margin-bottom: 40px;
+}
+
+.innerPassword {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px;
+  background-color: #242426;
+  border-radius: 10px;
+  gap: 40px;
+  margin-bottom: 40px;
+
+  span {
+    display: block;
+    margin-bottom: 8px;
+  }
+}
+
+.ColorMode {
+  background-color: #242426;
+  border-radius: 10px;
+  padding: 24px 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.int {
+  background: #323537;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-top: 8px;
+}
+
+.item {
+  width: 100%;
+}
+
+.itemTheme {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.buttonInner {
+  display: flex;
+  justify-content: flex-end;
+  gap: 40px;
+  margin-top: 48px;
+}

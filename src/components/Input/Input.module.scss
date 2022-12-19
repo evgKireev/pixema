@@ -1,0 +1,37 @@
+@import '../../scss/vars';
+
+.input {
+  width: 100%;
+  height: 56px;
+  background-color: $bgLite;
+  border-radius: 10px;
+  padding: 16px 50px 16px 20px;
+  border: 1px solid transparent;
+  outline: none;
+  font-weight: 500;
+  color: #fff;
+  &::placeholder {
+    color: $grey;
+  }
+  &:focus {
+    border: 2px solid $acsent;
+  }
+}
+
+.disabled {
+  background-color: $grey;
+  pointer-events: none;
+  &::placeholder {
+    color: $disabled;
+  }
+}
+
+.error {
+  &:focus {
+    border: 2px solid #ff5154;
+  }
+}
+
+.spanError {
+  color: #ff5154;
+}

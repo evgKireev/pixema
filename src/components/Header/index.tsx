@@ -6,7 +6,10 @@ import styles from './Header.module.scss';
 const Header = () => {
   return (
     <div className={styles.inner}>
-      <Logo />
+      <div className={styles.logo}>
+        <Logo />
+      </div>
+
       <div className={styles.innerBlock}>
         <Search disabled={false} filters={false} />
         <User />
