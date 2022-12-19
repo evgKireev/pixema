@@ -5,11 +5,12 @@ import Home from './pages/Home/Home';
 import OneCard from './pages/OneCard/OneCard';
 import Settings from './pages/Settings/Settings';
 import SignIn from './pages/SignIn/SignIn';
+import SignUp from './pages/SignUp/SignUp';
 import './scss/app.scss';
 
 const App = () => {
   const { pathname } = useLocation();
-  if (pathname === '/signin') {
+  if (pathname === '/signin' || 'signup') {
     const body = document.querySelector('body');
     body?.classList.add('bodyBg');
   }
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="*" element={<NoFaund />} />
         </Route>
         <Route path="signin" element={<SignIn />} />
+        <Route path="signup" element={<SignUp />} />
       </Routes>
     </div>
   );
