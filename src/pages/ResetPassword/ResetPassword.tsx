@@ -3,16 +3,16 @@ import Logo from '../../assets/img/logo';
 import Button, { ButtonTypeEnum } from '../../components/Button';
 import FormContainer from '../../components/FormContainer';
 import Input from '../../components/Input';
-import styles from './SignIn.module.scss';
+import styles from './ResetPassword.module.scss';
 
-const SignIn = () => {
+const ResetPassword = () => {
   return (
     <div className={styles.inner}>
       <div className={styles.logo}>
         <Link to={'/'}>
           <Logo />
         </Link>
-        <FormContainer title={'Sign In'}>
+        <FormContainer title={'Reset password'}>
           <>
             <div className={styles.innerInput}>
               <div>
@@ -23,29 +23,14 @@ const SignIn = () => {
                   placeholder={'Your email'}
                 />
               </div>
-              <div>
-                <span>Password</span>
-                <Input
-                  disabled={false}
-                  error={false}
-                  placeholder={'Your password'}
-                />
-              </div>
             </div>
-            <span className={styles.spanQ}>Forgot password?</span>{' '}
             <Button
-              title={'Sign in'}
+              title={'Reset'}
               type={ButtonTypeEnum.Primary}
               onClick={() => {}}
               disabled={false}
               className={styles.btn}
             />
-            <div className={styles.textLink}>
-              Don’t have an account?{' '}
-              <Link to={'/signup'}>
-                <span>Sign Up</span>
-              </Link>
-            </div>
           </>
         </FormContainer>
       </div>
@@ -53,4 +38,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default ResetPassword;

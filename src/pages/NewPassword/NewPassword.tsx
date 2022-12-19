@@ -3,34 +3,18 @@ import Logo from '../../assets/img/logo';
 import Button, { ButtonTypeEnum } from '../../components/Button';
 import FormContainer from '../../components/FormContainer';
 import Input from '../../components/Input';
-import styles from './SignUp.module.scss';
+import styles from './NewPassword.module.scss';
 
-const SignUp = () => {
+const NewPassword = () => {
   return (
     <div className={styles.inner}>
       <div className={styles.logo}>
         <Link to={'/'}>
           <Logo />
         </Link>
-        <FormContainer title={'Sign Up'}>
+        <FormContainer title={'New password'}>
           <>
             <div className={styles.innerInput}>
-              <div>
-                <span>Name</span>
-                <Input
-                  disabled={false}
-                  error={false}
-                  placeholder={'Your name'}
-                />
-              </div>
-              <div>
-                <span>Email</span>
-                <Input
-                  disabled={false}
-                  error={false}
-                  placeholder={'Your email'}
-                />
-              </div>
               <div>
                 <span>Password</span>
                 <Input
@@ -44,23 +28,17 @@ const SignUp = () => {
                 <Input
                   disabled={false}
                   error={false}
-                  placeholder={'Confirm password'}
+                  placeholder={'Confirm your password'}
                 />
               </div>
             </div>
             <Button
-              title={'Sign up'}
+              title={'Set password'}
               type={ButtonTypeEnum.Primary}
               onClick={() => {}}
               disabled={false}
               className={styles.btn}
             />
-            <div className={styles.textLink}>
-              Already have an account?
-              <Link to={'/signin'}>
-                <span>Sign In</span>
-              </Link>
-            </div>
           </>
         </FormContainer>
       </div>
@@ -68,4 +46,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default NewPassword;

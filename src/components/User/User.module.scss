@@ -39,8 +39,11 @@
   width: 24px;
   height: 24px;
   cursor: pointer;
+  transition: all 0.5s;
+
   &:hover {
     color: $acsent;
+    transition: all 0.5s;
   }
 }
 

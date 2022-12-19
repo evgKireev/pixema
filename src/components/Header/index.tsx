@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Logo from '../../assets/img/logo';
 import Search from '../Search';
 import User from '../User';
@@ -7,9 +8,10 @@ const Header = () => {
   return (
     <div className={styles.inner}>
       <div className={styles.logo}>
-        <Logo />
+        <Link to={'/'}>
+          <Logo />
+        </Link>
       </div>
-
       <div className={styles.innerBlock}>
         <Search disabled={false} filters={false} />
         <User />

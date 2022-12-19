@@ -6,8 +6,9 @@ import {
   MdKeyboardArrowRight,
   MdKeyboardArrowUp,
 } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 import styles from './User.module.scss';
-const registerUser = true;
+const registerUser = false;
 
 const User = () => {
   const userActive = ['Edit profile', 'Log Out'];
@@ -41,7 +42,9 @@ const User = () => {
         {registerUser ? (
           arrow
         ) : (
-          <MdKeyboardArrowRight className={styles.arrow} />
+          <Link to={'signin'}>
+            <MdKeyboardArrowRight className={styles.arrow} />
+          </Link>
         )}
       </div>
       <div
