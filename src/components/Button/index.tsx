@@ -11,15 +11,22 @@ type ButtonType = {
   type: ButtonTypeEnum;
   onClick: () => void;
   disabled: boolean;
+  className: string;
 };
 
-const Button: React.FC<ButtonType> = ({ title, onClick, type, disabled }) => {
+const Button: React.FC<ButtonType> = ({
+  title,
+  onClick,
+  type,
+  disabled,
+  className,
+}) => {
   const buttonStyles = styles[type];
   return (
     <>
       <button
         onClick={onClick}
-        className={classNames(styles.button, buttonStyles, {
+        className={classNames(styles.button, buttonStyles, className, {
           [styles.disabled]: disabled,
         })}
       >

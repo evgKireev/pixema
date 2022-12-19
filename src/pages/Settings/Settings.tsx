@@ -57,12 +57,14 @@ const Settings = () => {
           type={ButtonTypeEnum.Secondary}
           onClick={() => {}}
           disabled={false}
+          className={''}
         />
         <Button
           title={'Save'}
           type={ButtonTypeEnum.Primary}
           onClick={() => {}}
           disabled={false}
+          className={''}
         />
       </div>
     </div>

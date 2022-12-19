@@ -1,0 +1,45 @@
+@import '../../scss/vars';
+
+.logo {
+  padding: 48px 62px;
+}
+
+.innerInput {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 8px;
+  span {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 8px;
+  }
+}
+
+.spanQ {
+  font-weight: 500;
+  color: $grey;
+  display: block;
+  margin-bottom: 40px;
+}
+
+.btn {
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.textLink {
+  text-align: center;
+  font-weight: 500;
+  color: #80858b;
+  span {
+    color: $acsent;
+    cursor: pointer;
+    transition: all 0.5s;
+
+    &:hover {
+      color: $acsentLite;
+      transition: all 0.5s;
+    }
+  }
+}
