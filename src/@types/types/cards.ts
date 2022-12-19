@@ -39,3 +39,8 @@ type torrensType = {
   date_uploaded: string;
   date_uploaded_unix: number;
 };
+
+
+export type getCardaApi= {
+  query_term: string
+}

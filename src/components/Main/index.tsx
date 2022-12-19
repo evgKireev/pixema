@@ -1,17 +1,22 @@
 import { useEffect } from 'react';
-import { getCards } from '../../redux/cardsSlice';
+import { getCards, getCardsTrend } from '../../redux/cardsSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import Card from '../Card';
 import Loading from '../Loader';
+import NoInfo from '../NoInfo';
 import styles from './Main.module.scss';
 
 const Main = () => {
   const { cards } = useAppSelector((state) => state.cardsSlice);
+  const { cardsTrends } = useAppSelector((state) => state.cardsSlice);
   const { statusCards } = useAppSelector((state) => state.cardsSlice);
+  const { valueCategories } = useAppSelector((state) => state.categoriesSlice);
+  const { searchValue } = useAppSelector((state) => state.cardsSlice);
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(getCards());
-  }, []);
+    dispatch(getCards({ query_term: searchValue }));
+    dispatch(getCardsTrend());
+  }, [searchValue]);
 
   if (statusCards === 'rejected')
     return (
@@ -26,12 +31,26 @@ const Main = () => {
       </div>
     );
 
+  const getCardsCheck = () => {
+    if (valueCategories === 1) {
+      return cardsTrends;
+    } else {
+      return cards;
+    }
+  };
+
+  const cardsArray = getCardsCheck()
+
+  if (!cardsArray) {
+    return <NoInfo title={'There are no movies for your request'} />;
+  }
+
   return (
     <div className={styles.inner}>
       {statusCards === 'pennding' ? (
         <Loading />
       ) : (
-        cards.map((card) => (
+        cardsArray.map((card) => (
           <Card
             key={card.id}
             images={card.large_cover_image}

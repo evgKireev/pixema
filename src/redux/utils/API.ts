@@ -1,7 +1,12 @@
-import { API } from '../../@types/constant';
+import { API, limitCards } from '../../@types/constant';
+import { getCardaApi } from '../../@types/types/cards';
 
-const fetchGetCards = () => {
-  return API.get('v2/list_movies.json?limit=10');
+const fetchGetCards = ({ query_term }: getCardaApi) => {
+  return API.get(`v2/list_movies.json?${limitCards}`, { query_term });
+};
+
+const fetchGetCardsTrends = () => {
+  return API.get(`v2/list_movies.json?minimum_rating=8.6`);
 };
 
 const fetchGetCard = (id: string) => {
@@ -12,4 +17,9 @@ const fetchGetSuggestions = (id: string) => {
   return API.get(`v2/movie_suggestions.json?movie_id=${id}`);
 };
 
-export default { fetchGetCards, fetchGetCard, fetchGetSuggestions };
+export default {
+  fetchGetCards,
+  fetchGetCard,
+  fetchGetSuggestions,
+  fetchGetCardsTrends,
+};

@@ -13,7 +13,7 @@ const Header = () => {
         </Link>
       </div>
       <div className={styles.innerBlock}>
-        <Search disabled={false} filters={false} />
+        <Search />
         <User />
       </div>
     </div>

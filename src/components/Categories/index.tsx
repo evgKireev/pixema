@@ -3,11 +3,13 @@ import { RiHome6Fill } from 'react-icons/ri';
 import { AiFillFire } from 'react-icons/ai';
 import { BsFillBookmarkFill } from 'react-icons/bs';
 import { MdSettings } from 'react-icons/md';
-import { useState } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { setValueCategories } from '../../redux/categoriesSlice';
 const Categories = () => {
-  const [valueCategories, setValueCategories] = useState(0);
+  const { valueCategories } = useAppSelector((state) => state.categoriesSlice);
+  const dispatch = useAppDispatch();
   const categories = [
     { name: 'Home', icon: <RiHome6Fill />, link: '/' },
     { name: 'Trends', icon: <AiFillFire />, link: '' },
@@ -23,7 +25,9 @@ const Categories = () => {
               [styles.active]: valueCategories === index,
             })}
             key={index}
-            onClick={() => setValueCategories(index)}
+            onClick={() => {
+              dispatch(setValueCategories(index));
+            }}
           >
             <div className={styles.icon} key={index}>
               {item.icon}

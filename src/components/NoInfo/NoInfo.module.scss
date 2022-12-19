@@ -1,0 +1,17 @@
+.inner {
+  left: 55%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  img {
+    margin-bottom: 23px;
+  }
+}
+
+.title {
+  color: #80858b;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 32px;
+  text-align: center;
+}
