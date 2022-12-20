@@ -30,18 +30,6 @@
     height: 56px;
     background-color: $bg;
   }
-  svg {
-    color: #afb2b6;
-    transition: all 0.5s;
-    cursor: pointer;
-    width: 20px;
-    height: 20px;
-    &:hover {
-      color: $acsent;
-      transform: scale(1.1);
-      transition: all 0.5s;
-    }
-  }
 }
 
 .list {
@@ -136,4 +124,20 @@
   padding-top: 40px;
   display: flex;
   gap: 40px;
+}
+
+.bookmark,
+.shareLine {
+  color: #afb2b6;
+  transition: all 0.5s;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  &:hover {
+    color: $acsentLite;
+  }
+}
+
+.isBookmark {
+  color: $acsent;
 }

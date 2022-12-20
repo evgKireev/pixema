@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CardType, getCardaApi } from '../@types/types/cards';
+import { getCartLS } from './utils/getCardsFavoritesLS';
 
 type initialStateType = {
   cards: CardType[];
   card: CardType | null;
   cardSuggestions: CardType[];
   cardsTrends: CardType[];
+  cardsFavorites: CardType[];
   statusCards: string;
   statusCard: string;
   statusCardsTrends: string;
@@ -13,11 +15,13 @@ type initialStateType = {
   searchValue: string;
 };
 
+const { cardsFavorites } = getCartLS();
 const initialState: initialStateType = {
   cards: [],
   card: null,
   cardSuggestions: [],
   cardsTrends: [],
+  cardsFavorites,
   statusCards: '',
   statusCard: '',
   statusSuggestions: '',
@@ -44,6 +48,17 @@ const cardsSlice = createSlice({
     },
     setSuggestions: (state, actions: PayloadAction<CardType[]>) => {
       state.cardSuggestions = actions.payload;
+    },
+    setCardsFavorites: (state, actions: PayloadAction<CardType>) => {
+      const card = actions.payload;
+      const cardsFavoritesIndex = state.cardsFavorites.findIndex(
+        (value) => value.id === card.id
+      );
+      if (cardsFavoritesIndex === -1) {
+        state.cardsFavorites.push(card);
+      } else {
+        state.cardsFavorites.splice(cardsFavoritesIndex);
+      }
     },
     setStatusCards: (state, actions: PayloadAction<string>) => {
       state.statusCards = actions.payload;
@@ -76,5 +91,6 @@ export const {
   getCardsTrend,
   setCardsTrend,
   setStatusCardsTrends,
+  setCardsFavorites,
 } = cardsSlice.actions;
 export default cardsSlice.reducer;

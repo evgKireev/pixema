@@ -3,24 +3,30 @@ import { BsFillBookmarkFill } from 'react-icons/bs';
 import { AiFillFire } from 'react-icons/ai';
 import styles from './Card.module.scss';
 import { Link } from 'react-router-dom';
+import {  useAppSelector } from '../../redux/hooks';
+import { CardType } from '../../@types/types/cards';
 
-type CardType = {
+
+type CardTypeOne = {
   images: string;
   title: string;
   genre: string[];
   rating: number;
-  favorites: boolean;
   id: number;
+  card: CardType;
 };
 
-const Card: React.FC<CardType> = ({
+const Card: React.FC<CardTypeOne> = ({
   images,
   title,
   genre,
   rating,
-  favorites,
   id,
+  card,
 }) => {
+  const { cardsFavorites } = useAppSelector((state) => state.cardsSlice);
+  const isBookmark =
+    cardsFavorites.findIndex((value) => value.id === card.id) > -1;
   return (
     <div className={styles.card}>
       <div className={styles.img}>
@@ -49,7 +55,7 @@ const Card: React.FC<CardType> = ({
         {rating > 8.5 ? <AiFillFire /> : ''}
         {rating}
       </span>
-      {favorites && (
+      {isBookmark && (
         <span className={styles.favorites}>
           <BsFillBookmarkFill />
         </span>

@@ -27,12 +27,12 @@ const MultipleItems: React.FC<MultipleItemsType> = ({ cards }) => {
           ? [...new Array(4)].map((_, index) => <Skeleton key={index} />)
           : cards.map((card) => (
               <Card
+                card={card}
                 key={card.id}
                 images={card.medium_cover_image}
                 title={card.title}
                 genre={card.genres}
                 rating={card.rating}
-                favorites={false}
                 id={card.id}
               />
             ))}

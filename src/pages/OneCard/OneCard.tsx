@@ -5,9 +5,12 @@ import { BsFillBookmarkFill } from 'react-icons/bs';
 import { RiShareLine } from 'react-icons/ri';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { getCard, getSuggestions } from '../../redux/cardsSlice';
+import {
+  getCard,
+  getSuggestions,
+  setCardsFavorites,
+} from '../../redux/cardsSlice';
 import styles from './OneCard.module.scss';
-import Card from '../../components/Card';
 import Loading from '../../components/Loader';
 import MultipleItems from '../../components/Slider';
 
@@ -17,6 +20,10 @@ const OneCard = () => {
   const { card } = useAppSelector((state) => state.cardsSlice);
   const { cardSuggestions } = useAppSelector((state) => state.cardsSlice);
   const { statusCards } = useAppSelector((state) => state.cardsSlice);
+  const { cardsFavorites } = useAppSelector((state) => state.cardsSlice);
+  const isBookmark =
+    cardsFavorites.findIndex((value) => value.id === card?.id) > -1;
+
   useEffect(() => {
     dispatch(getCard(id));
     dispatch(getSuggestions(id));
@@ -34,9 +41,18 @@ const OneCard = () => {
               <img src={card?.large_cover_image} alt="banner" />
             </div>
             <div>
-              <div className={styles.btn}>
-                <BsFillBookmarkFill />
-                <RiShareLine />
+              <div className={classNames(styles.btn)}>
+                <BsFillBookmarkFill
+                  className={classNames(styles.bookmark, {
+                    [styles.isBookmark]: isBookmark,
+                  })}
+                  onClick={() => {
+                    if (card) {
+                      dispatch(setCardsFavorites(card));
+                    }
+                  }}
+                />
+                <RiShareLine className={styles.shareLine} />
               </div>
             </div>
           </div>
