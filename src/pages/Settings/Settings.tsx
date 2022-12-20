@@ -1,23 +1,51 @@
+import classNames from 'classnames';
+import { useEffect } from 'react';
 import Button, { ButtonTypeEnum } from '../../components/Button';
 import Input from '../../components/Input';
 import Switch from '../../components/Switch';
+import { useAppSelector } from '../../redux/hooks';
 import styles from './Settings.module.scss';
+
 const Settings = () => {
+  const { valueTheme } = useAppSelector((state) => state.themeSlice);
+  useEffect(() => {
+    localStorage.setItem('theme', JSON.stringify(valueTheme));
+  }, [valueTheme]);
   return (
     <div className={styles.wrapper}>
       <h2 className={styles.titile}>Profile</h2>
-      <div className={styles.innerProfile}>
+      <div
+        className={classNames(styles.innerProfile, {
+          [styles.ThemeWhite]: valueTheme,
+        })}
+      >
         <div className={styles.item}>
           <span>Name</span>
-          <div className={styles.int}>{'Artem Lapitsky'}</div>
+          <div
+            className={classNames(styles.int, {
+              [styles.ThemeWhite]: valueTheme,
+            })}
+          >
+            {'Artem Lapitsky'}
+          </div>
         </div>
         <div className={styles.item}>
           <span>Email</span>
-          <div className={styles.int}>{'a.lapitsky@gmail.com'}</div>
+          <div
+            className={classNames(styles.int, {
+              [styles.ThemeWhite]: valueTheme,
+            })}
+          >
+            {'a.lapitsky@gmail.com'}
+          </div>
         </div>
       </div>
       <h2 className={styles.titile}>Password</h2>
-      <div className={styles.innerPassword}>
+      <div
+        className={classNames(styles.innerPassword, {
+          [styles.ThemeWhite]: valueTheme,
+        })}
+      >
         <div className={styles.item}>
           <span>Password</span>
           <Input disabled={false} error={false} placeholder={'Your password'} />
@@ -42,11 +70,15 @@ const Settings = () => {
         </div>
       </div>
       <h2 className={styles.titile}>Color mode</h2>
-      <div className={styles.ColorMode}>
+      <div
+        className={classNames(styles.ColorMode, {
+          [styles.ThemeWhite]: valueTheme,
+        })}
+      >
         <div className={styles.itemTheme}>
-          <span>Dark</span>
+          <span> {valueTheme ? 'White' : 'Dark'}</span>
           <span style={{ color: 'grey', fontWeight: '500' }}>
-            {'Use dark thema'}
+            {valueTheme ? 'Use white thema' : 'Use dark thema'}
           </span>
         </div>
         <Switch />

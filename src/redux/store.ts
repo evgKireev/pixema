@@ -3,11 +3,12 @@ import createSagaMiddleware from 'redux-saga';
 import cardsSlice from './cardsSlice';
 import categoriesSlice from './categoriesSlice';
 import { rootSaga } from './Sagas/rootSaga';
+import themeSlice from './themeSlice';
 
 const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
-  reducer: { cardsSlice, categoriesSlice },
+  reducer: { cardsSlice, categoriesSlice, themeSlice },
   middleware: [sagaMiddleware],
 });
 

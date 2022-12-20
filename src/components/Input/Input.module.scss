@@ -9,7 +9,7 @@
   border: 1px solid transparent;
   outline: none;
   font-weight: 500;
-  color: #fff;
+  color: white;
   &::placeholder {
     color: $grey;
   }
@@ -34,4 +34,10 @@
 
 .spanError {
   color: #ff5154;
+}
+
+.themeWhite {
+  border: 1px solid #afb2b6;
+  background-color: #fff;
+  color: #242426;
 }

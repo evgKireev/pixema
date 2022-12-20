@@ -7,6 +7,7 @@ import {
   MdKeyboardArrowUp,
 } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import { useAppSelector } from '../../redux/hooks';
 import styles from './User.module.scss';
 const registerUser = false;
 
@@ -14,6 +15,7 @@ const User = () => {
   const userActive = ['Edit profile', 'Log Out'];
   const [activUser, setActiveUser] = React.useState<number | null>(null);
   const [openModalUser, setOpenModalUser] = React.useState<boolean>(false);
+  const { valueTheme } = useAppSelector((state) => state.themeSlice);
   const arrow = openModalUser ? (
     <MdKeyboardArrowUp
       className={styles.arrow}
@@ -50,6 +52,7 @@ const User = () => {
       <div
         className={classNames(styles.userActiveInner, {
           [styles.blockModal]: openModalUser,
+          [styles.themeWhite]: valueTheme,
         })}
       >
         <ul>
@@ -61,6 +64,7 @@ const User = () => {
               }}
               className={classNames(styles.item, {
                 [styles.active]: activUser === index,
+                [styles.itemThemeWhite]: valueTheme,
               })}
               key={index}
             >

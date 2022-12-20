@@ -21,6 +21,8 @@ const OneCard = () => {
   const { cardSuggestions } = useAppSelector((state) => state.cardsSlice);
   const { statusCards } = useAppSelector((state) => state.cardsSlice);
   const { cardsFavorites } = useAppSelector((state) => state.cardsSlice);
+  const { valueTheme } = useAppSelector((state) => state.themeSlice);
+  const rating = card?.rating;
   const isBookmark =
     cardsFavorites.findIndex((value) => value.id === card?.id) > -1;
 
@@ -29,7 +31,6 @@ const OneCard = () => {
     dispatch(getSuggestions(id));
     window.scrollTo(0, 0);
   }, [id]);
-  const rating = card?.rating;
   return (
     <>
       {statusCards === 'pennding' ? (
@@ -41,7 +42,11 @@ const OneCard = () => {
               <img src={card?.large_cover_image} alt="banner" />
             </div>
             <div>
-              <div className={classNames(styles.btn)}>
+              <div
+                className={classNames(styles.btn, {
+                  [styles.ThemeWhite]: valueTheme,
+                })}
+              >
                 <BsFillBookmarkFill
                   className={classNames(styles.bookmark, {
                     [styles.isBookmark]: isBookmark,
@@ -68,7 +73,7 @@ const OneCard = () => {
             <div className={styles.label}>
               <span
                 className={classNames(styles.rating, {
-                  [styles.ratingOrange]: rating ? rating <= 5 : '',
+                  [styles.ratingOrange]: rating ? rating <= 5 : rating === 0,
                   [styles.ratingEllow]: rating ? rating > 5 && rating <= 7 : '',
                   [styles.ratingGreen]: rating
                     ? rating > 7 && rating <= 8.5
@@ -79,10 +84,18 @@ const OneCard = () => {
                 {rating && rating > 8.5 ? <AiFillFire /> : ''}
                 {rating}
               </span>
-              <span className={classNames(styles.rating, styles.time)}>
+              <span
+                className={classNames(styles.rating, styles.time, {
+                  [styles.ThemeWhite]: valueTheme,
+                })}
+              >
                 123 min
               </span>
-              <span className={classNames(styles.rating, styles.time)}>
+              <span
+                className={classNames(styles.rating, styles.time, {
+                  [styles.ThemeWhite]: valueTheme,
+                })}
+              >
                 IMG {card?.runtime}
               </span>
             </div>

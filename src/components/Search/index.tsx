@@ -11,6 +11,7 @@ const disabled = false;
 const Search: React.FC = () => {
   const [inpValue, setInpValue] = useState('');
   const dispatch = useAppDispatch();
+  const { valueTheme } = useAppSelector((state) => state.themeSlice);
   const updateSearchValue = useCallback(
     debounce((str) => {
       dispatch(setSearchValue(str));
@@ -27,10 +28,17 @@ const Search: React.FC = () => {
           updateSearchValue(e.target.value);
         }}
         placeholder="Search"
-        className={classNames(styles.input, { [styles.disabled]: disabled })}
+        className={classNames(styles.input, {
+          [styles.disabled]: disabled,
+          [styles.themeWhite]: valueTheme,
+        })}
       />
       {inpValue ? (
-        <SearchListActive className={styles.svg} />
+        <SearchListActive
+          className={classNames(styles.svg, {
+            [styles.svgThemeWhite]: valueTheme,
+          })}
+        />
       ) : (
         <SearchList className={styles.svg} />
       )}

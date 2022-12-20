@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useEffect } from 'react';
 import { Route, Routes, useLocation, useParams } from 'react-router-dom';
 import Main from './components/Main';
@@ -9,10 +10,19 @@ import ResetPassword from './pages/ResetPassword/ResetPassword';
 import Settings from './pages/Settings/Settings';
 import SignIn from './pages/SignIn/SignIn';
 import SignUp from './pages/SignUp/SignUp';
+import { useAppSelector } from './redux/hooks';
 import './scss/app.scss';
 
 const App = () => {
   const { pathname } = useLocation();
+  const { valueTheme } = useAppSelector((state) => state.themeSlice);
+  const body = document.querySelector('body');
+  if (valueTheme) {
+    body?.classList.add('bodyWhite');
+  }else{
+    body?.classList.remove('bodyWhite');
+  }
+
   useEffect(() => {
     if (
       pathname === '/signin' ||
@@ -20,11 +30,9 @@ const App = () => {
       pathname === '/resetpassword' ||
       pathname === '/newpassword'
     ) {
-      const body = document.querySelector('body');
       body?.classList.add('bodyBg');
     }
     return () => {
-      const body = document.querySelector('body');
       body?.classList.remove('bodyBg');
     };
   }, [pathname]);

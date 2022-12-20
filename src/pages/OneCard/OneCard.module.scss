@@ -141,3 +141,11 @@
 .isBookmark {
   color: $acsent;
 }
+
+.ThemeWhite {
+  background-color: #fff;
+  border: 1px solid #afb2b6;
+  &::after {
+    background-color: #afb2b6;
+  }
+}

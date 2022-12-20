@@ -3,6 +3,9 @@
   width: 266px;
   position: relative;
   transition: all 0.5s;
+  a {
+    color: #fff;
+  }
 
   &:hover {
     transform: scale(1.1);
@@ -30,7 +33,6 @@
 .title {
   font-weight: 700;
   line-height: 24px;
-  color: #fff;
   cursor: pointer;
   transition: all 0.5s;
 
