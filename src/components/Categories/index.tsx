@@ -7,6 +7,12 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { setValueCategories } from '../../redux/categoriesSlice';
+import {
+  setInputValue,
+  setUserGenre,
+  setValueTabs,
+} from '../../redux/filtersSlice';
+import { getCards } from '../../redux/cardsSlice';
 const Categories = () => {
   const { valueCategories } = useAppSelector((state) => state.categoriesSlice);
   const dispatch = useAppDispatch();
@@ -27,6 +33,18 @@ const Categories = () => {
             key={index}
             onClick={() => {
               dispatch(setValueCategories(index));
+              if (item.name === 'Home') {
+                dispatch(setValueTabs('year'));
+                dispatch(setInputValue(''));
+                dispatch(setUserGenre(''));
+                dispatch(
+                  getCards({
+                    query_term: '',
+                    sort_by: '',
+                    genre: '',
+                  })
+                );
+              }
             }}
           >
             <div className={styles.icon} key={index}>

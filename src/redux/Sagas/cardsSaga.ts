@@ -18,10 +18,12 @@ import {
 import API from '../utils/API';
 
 function* getCardsWorker(actions: PayloadAction<getCardaApi>) {
-  const { query_term } = actions.payload;
+  const { query_term, sort_by, genre } = actions.payload;
   yield put(setStatusCards('pennding'));
   const { data, ok, problem, status } = yield call(API.fetchGetCards, {
     query_term,
+    sort_by,
+    genre,
   });
   if (ok && data) {
     yield put(setCards(data.data.movies));

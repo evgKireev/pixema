@@ -16,7 +16,7 @@ const Main = () => {
 
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(getCards({ query_term: searchValue }));
+    dispatch(getCards({ query_term: searchValue, sort_by: '', genre: '' }));
     dispatch(getCardsTrend());
     localStorage.setItem('cart', JSON.stringify(cardsFavorites));
   }, [searchValue]);
@@ -27,7 +27,7 @@ const Main = () => {
     } else if (valueCategories === 2) {
       return cardsFavorites;
     } else {
-      return cards;
+      return cards; 
     }
   };
   const cardsArray = getCardsCheck();

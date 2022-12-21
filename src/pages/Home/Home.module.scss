@@ -1,5 +1,28 @@
+@import '../../scss/vars';
 .inner {
   display: flex;
   gap: 40px;
   min-height: 65vh;
+  position: relative;
+  overflow: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.innerSvg {
+  position: fixed;
+  right: 3%;
+  bottom: 5%;
+}
+.filterIcon {
+  color: $acsent;
+  transition: all 0.5s;
+  width: 40px;
+  height: 40px;
+
+  cursor: pointer;
+  &:hover {
+    color: $acsentLite;
+    transition: all 0.5s;
+  }
 }

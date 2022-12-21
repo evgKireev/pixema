@@ -1,8 +1,11 @@
 import { API, limitCards } from '../../@types/constant';
 import { getCardaApi } from '../../@types/types/cards';
 
-const fetchGetCards = ({ query_term }: getCardaApi) => {
-  return API.get(`v2/list_movies.json?${limitCards}`, { query_term });
+const fetchGetCards = ({ query_term, sort_by, genre }: getCardaApi) => {
+  return API.get(`v2/list_movies.json?${limitCards}&genre=${genre}`, {
+    query_term,
+    sort_by,
+  });
 };
 
 const fetchGetCardsTrends = () => {
