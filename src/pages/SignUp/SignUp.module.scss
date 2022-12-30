@@ -4,6 +4,10 @@
   padding: 48px 62px;
 }
 
+.spinner {
+  text-align: center;
+}
+
 .innerInput {
   display: flex;
   flex-direction: column;
@@ -15,7 +19,6 @@
     margin-bottom: 8px;
   }
 }
-
 
 .btn {
   width: 100%;
@@ -36,5 +39,23 @@
       color: $acsentLite;
       transition: all 0.5s;
     }
+  }
+}
+.innerInp {
+  position: relative;
+}
+
+.eye {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  transition: all 0.5s;
+
+  &:hover {
+    color: $acsentLite;
+    transition: all 0.5s;
   }
 }

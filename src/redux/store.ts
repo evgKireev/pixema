@@ -1,12 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { rootSaga } from './Sagas/rootSaga';
-
 import createSagaMiddleware from 'redux-saga';
 import cardsSlice from './cardsSlice';
 import categoriesSlice from './categoriesSlice';
 import themeSlice from './themeSlice';
 import otherSlice from './otherSlice';
 import filtersSlice from './filtersSlice';
+import signInAuthSlice from './signInAuthSlice';
+import signUpAuthSlice from './signUpAuthSlice';
 const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
@@ -16,6 +17,8 @@ export const store = configureStore({
     themeSlice,
     otherSlice,
     filtersSlice,
+    signInAuthSlice,
+    signUpAuthSlice
   },
   middleware: [sagaMiddleware],
 });

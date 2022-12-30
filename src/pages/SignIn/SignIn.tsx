@@ -1,23 +1,50 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../assets/img/logo';
 import Button, { ButtonTypeEnum } from '../../components/Button';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import FormContainer from '../../components/FormContainer';
 import Input from '../../components/Input';
+import {
+  getSignInUser,
+  setMailValue,
+  setPasswordValue,
+} from '../../redux/signInAuthSlice';
 import styles from './SignIn.module.scss';
+import { useMemo, useState } from 'react';
+import Loading from '../../components/Loader';
 
 const SignIn = () => {
+  const dispach = useAppDispatch();
+  const { mailValue } = useAppSelector((state) => state.signInAuthSlice);
+  const { passwordValue } = useAppSelector((state) => state.signInAuthSlice);
+  const { statusSignIn } = useAppSelector((state) => state.signInAuthSlice);
+  const [seePassword, setSeePassword] = useState(false);
+  const navigate = useNavigate();
+
+  const validationForm = useMemo(() => {
+    return mailValue.length > 0 && passwordValue.length > 0;
+  }, [mailValue, passwordValue]);
+
   return (
-    <div className={styles.inner}>
+    <div>
       <div className={styles.logo}>
         <Link to={'/'}>
           <Logo />
         </Link>
+      </div>
+      {statusSignIn === 'pending' ? (
+        <div className={styles.spinner}>
+          <Loading />
+        </div>
+      ) : (
         <FormContainer title={'Sign In'}>
           <>
             <div className={styles.innerInput}>
               <div>
                 <span>Email</span>
                 <Input
+                  onChange={(e) => dispach(setMailValue(e.target.value))}
                   disabled={false}
                   error={false}
                   placeholder={'Your email'}
@@ -25,19 +52,41 @@ const SignIn = () => {
               </div>
               <div>
                 <span>Password</span>
-                <Input
-                  disabled={false}
-                  error={false}
-                  placeholder={'Your password'}
-                />
+                <div className={styles.innerInp}>
+                  <Input
+                    onChange={(e) => dispach(setPasswordValue(e.target.value))}
+                    disabled={false}
+                    error={false}
+                    placeholder={'Your password'}
+                    type={seePassword ? 'text' : 'password'}
+                  />
+                  <div onClick={() => setSeePassword(!seePassword)}>
+                    {seePassword ? (
+                      <AiOutlineEyeInvisible className={styles.eye} />
+                    ) : (
+                      <AiOutlineEye className={styles.eye} />
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
             <span className={styles.spanQ}>Forgot password?</span>{' '}
             <Button
               title={'Sign in'}
               type={ButtonTypeEnum.Primary}
-              onClick={() => {}}
-              disabled={false}
+              onClick={() =>
+                dispach(
+                  getSignInUser({
+                    datas: {
+                      email: mailValue,
+                      password: passwordValue,
+                      token_name: 'token',
+                    },
+                    callback: () => navigate('/'),
+                  })
+                )
+              }
+              disabled={!validationForm}
               className={styles.btn}
             />
             <div className={styles.textLink}>
@@ -48,7 +97,7 @@ const SignIn = () => {
             </div>
           </>
         </FormContainer>
-      </div>
+      )}
     </div>
   );
 };

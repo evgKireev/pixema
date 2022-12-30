@@ -48,12 +48,18 @@ const Settings = () => {
       >
         <div className={styles.item}>
           <span>Password</span>
-          <Input disabled={false} error={false} placeholder={'Your password'} />
+          <Input
+            disabled={false}
+            error={false}
+            placeholder={'Your password'}
+            onChange={() => {}}
+          />
         </div>
         <div className={styles.item}>
           <div style={{ marginBottom: '12px' }}>
             <span>New password</span>
             <Input
+              onChange={() => {}}
               disabled={false}
               error={false}
               placeholder={'New password'}
@@ -62,6 +68,7 @@ const Settings = () => {
           <div>
             <span>Confirm password</span>
             <Input
+              onChange={() => {}}
               disabled={false}
               error={false}
               placeholder={'Confirm password'}

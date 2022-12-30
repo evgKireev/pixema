@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CardType, getCardaApi } from '../@types/types/cards';
+import { CardsType, CardType, GetCardaApi } from '../@types/types/cards';
 import { getCartLS } from './utils/getCardsFavoritesLS';
 
 type initialStateType = {
@@ -8,11 +8,16 @@ type initialStateType = {
   cardSuggestions: CardType[];
   cardsTrends: CardType[];
   cardsFavorites: CardType[];
+  cardsFilter: CardType[];
+  cardsSearch: CardType[];
   statusCards: string;
   statusCard: string;
   statusCardsTrends: string;
   statusSuggestions: string;
   searchValue: string;
+  page: number;
+  isOverGlobal: boolean;
+  totalCaunt: number;
 };
 
 const { cardsFavorites } = getCartLS();
@@ -21,24 +26,35 @@ const initialState: initialStateType = {
   card: null,
   cardSuggestions: [],
   cardsTrends: [],
+  cardsFilter: [],
+  cardsSearch: [],
   cardsFavorites,
   statusCards: '',
   statusCard: '',
   statusSuggestions: '',
   statusCardsTrends: '',
   searchValue: '',
+  page: 1,
+  isOverGlobal: false,
+  totalCaunt: 0,
 };
 
 const cardsSlice = createSlice({
   name: 'cards',
   initialState,
   reducers: {
-    getCards: (state, actions: PayloadAction<getCardaApi>) => {},
+    getCards: (state, actions: PayloadAction<GetCardaApi>) => {},
     getCard: (state, actions: PayloadAction<string | undefined>) => {},
     getCardsTrend: (state, actions: PayloadAction<string | undefined>) => {},
     getSuggestions: (state, actions: PayloadAction<string | undefined>) => {},
-    setCards: (state, actions: PayloadAction<CardType[]>) => {
-      state.cards = actions.payload;
+    setCards: (state, actions: PayloadAction<CardsType>) => {
+      const { isOverwrite, cards } = actions.payload;
+      state.isOverGlobal = isOverwrite;
+      if (isOverwrite) {
+        state.cardsFilter = [...state.cardsFilter, ...cards];
+      } else {
+        state.cards = [...state.cards, ...cards];
+      }
     },
     setCard: (state, actions: PayloadAction<CardType>) => {
       state.card = actions.payload;
@@ -75,6 +91,12 @@ const cardsSlice = createSlice({
     setSearchValue: (state, actions: PayloadAction<string>) => {
       state.searchValue = actions.payload;
     },
+    setPage: (state, actions: PayloadAction<number>) => {
+      state.page = actions.payload;
+    },
+    seTtotalCaunt: (state, actions: PayloadAction<number>) => {
+      state.totalCaunt = actions.payload;
+    },
   },
 });
 export const {
@@ -92,5 +114,7 @@ export const {
   setCardsTrend,
   setStatusCardsTrends,
   setCardsFavorites,
+  setPage,
+  seTtotalCaunt,
 } = cardsSlice.actions;
 export default cardsSlice.reducer;

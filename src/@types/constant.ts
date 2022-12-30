@@ -1,3 +1,5 @@
 import { create } from 'apisauce';
 export const API = create({ baseURL: 'https://yts.mx/api' });
-export const limitCards = 'limit=10'
+export const API_AUTH = create({ baseURL: 'https://unelmamovie.com/api/v1' });
+export const limitCards = 'limit=10';
+export const TOKEN_KEY = 'Token1';

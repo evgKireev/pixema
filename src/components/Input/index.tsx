@@ -5,14 +5,23 @@ type SearchType = {
   disabled: boolean;
   error: boolean;
   placeholder: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  type?: string;
 };
 
-const Input: React.FC<SearchType> = ({ disabled, error, placeholder }) => {
+const Input: React.FC<SearchType> = ({
+  disabled,
+  error,
+  placeholder,
+  onChange,
+  type,
+}) => {
   const { valueTheme } = useAppSelector((state) => state.themeSlice);
-
   return (
     <>
       <input
+        type={type}
+        onChange={onChange}
         placeholder={placeholder}
         className={classNames(styles.input, {
           [styles.disabled]: disabled,

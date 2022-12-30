@@ -1,9 +1,8 @@
-import styles from './Categories.module.scss';
 import { RiHome6Fill } from 'react-icons/ri';
 import { AiFillFire } from 'react-icons/ai';
 import { BsFillBookmarkFill } from 'react-icons/bs';
 import { MdSettings } from 'react-icons/md';
-import classNames from 'classnames';
+import { getCards, setPage } from '../../redux/cardsSlice';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { setValueCategories } from '../../redux/categoriesSlice';
@@ -12,9 +11,13 @@ import {
   setUserGenre,
   setValueTabs,
 } from '../../redux/filtersSlice';
-import { getCards } from '../../redux/cardsSlice';
+import classNames from 'classnames';
+import styles from './Categories.module.scss';
+
 const Categories = () => {
   const { valueCategories } = useAppSelector((state) => state.categoriesSlice);
+  const { page } = useAppSelector((state) => state.cardsSlice);
+
   const dispatch = useAppDispatch();
   const categories = [
     { name: 'Home', icon: <RiHome6Fill />, link: '/' },
@@ -42,8 +45,11 @@ const Categories = () => {
                     query_term: '',
                     sort_by: '',
                     genre: '',
+                    page,
+                    isOverwrite: false,
                   })
                 );
+                dispatch(setPage(1));
               }
             }}
           >

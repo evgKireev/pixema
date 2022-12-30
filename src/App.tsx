@@ -1,16 +1,15 @@
-import classNames from 'classnames';
 import { useEffect } from 'react';
-import { Route, Routes, useLocation, useParams } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Main from './components/Main';
 import NoFaund from './components/NoFaund';
 import Home from './pages/Home/Home';
-import NewPassword from './pages/NewPassword/NewPassword';
 import OneCard from './pages/OneCard/OneCard';
-import ResetPassword from './pages/ResetPassword/ResetPassword';
 import Settings from './pages/Settings/Settings';
 import SignIn from './pages/SignIn/SignIn';
 import SignUp from './pages/SignUp/SignUp';
 import { useAppSelector } from './redux/hooks';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './scss/app.scss';
 
 const App = () => {
@@ -19,7 +18,7 @@ const App = () => {
   const body = document.querySelector('body');
   if (valueTheme) {
     body?.classList.add('bodyWhite');
-  }else{
+  } else {
     body?.classList.remove('bodyWhite');
   }
 
@@ -47,9 +46,8 @@ const App = () => {
         </Route>
         <Route path="signin" element={<SignIn />} />
         <Route path="signup" element={<SignUp />} />
-        <Route path="resetpassword" element={<ResetPassword />} />
-        <Route path="newpassword" element={<NewPassword />} />
       </Routes>
+      <ToastContainer position="bottom-right" />
     </div>
   );
 };

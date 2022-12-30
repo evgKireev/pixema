@@ -64,13 +64,16 @@
   padding: 17px 20px 15px 20px;
   border-bottom: 1px solid #323537;
   cursor: pointer;
+  transition: all 0.5s;
+
   &:last-child {
     border-bottom: none;
   }
-}
+  &:hover {
+    color: $acsent;
+    transition: all 0.5s;
 
-.active {
-  color: $acsent;
+  }
 }
 
 .blockModal {
@@ -87,5 +90,4 @@
 
 .itemThemeWhite {
   border-bottom: 1px solid #afb2b6;
- 
 }

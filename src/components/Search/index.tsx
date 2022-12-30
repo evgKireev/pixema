@@ -1,7 +1,7 @@
 import SearchList from '../../assets/img/Search/SearchList';
 import SearchListActive from '../../assets/img/Search/SearchListActive';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { setSearchValue } from '../../redux/cardsSlice';
+import { getCards, setSearchValue } from '../../redux/cardsSlice';
 import debounce from 'lodash.debounce';
 import { useCallback, useEffect, useState } from 'react';
 import classNames from 'classnames';
@@ -13,11 +13,22 @@ const Search: React.FC = () => {
   const [disabled, setDisabled] = useState(false);
   const { valueTheme } = useAppSelector((state) => state.themeSlice);
   const { valueCategories } = useAppSelector((state) => state.categoriesSlice);
+  const { page } = useAppSelector((state) => state.cardsSlice);
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
+
   const updateSearchValue = useCallback(
     debounce((str) => {
-      dispatch(setSearchValue(str));
+      // dispatch(setSearchValue(str));
+      dispatch(
+        getCards({
+          query_term: str,
+          sort_by: '',
+          genre: '',
+          page,
+          isOverwrite: true,
+        })
+      );
     }, 1000),
     []
   );
@@ -64,6 +75,3 @@ const Search: React.FC = () => {
 };
 
 export default Search;
-function setInputSearch(str: any): any {
-  throw new Error('Function not implemented.');
-}

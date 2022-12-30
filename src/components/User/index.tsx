@@ -1,21 +1,30 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FiUser } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { logoutUser } from '../../redux/signInAuthSlice';
+import styles from './User.module.scss';
 import {
   MdKeyboardArrowDown,
   MdKeyboardArrowRight,
   MdKeyboardArrowUp,
 } from 'react-icons/md';
-import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../redux/hooks';
-import styles from './User.module.scss';
-const registerUser = false;
 
 const User = () => {
   const userActive = ['Edit profile', 'Log Out'];
   const [activUser, setActiveUser] = React.useState<number | null>(null);
   const [openModalUser, setOpenModalUser] = React.useState<boolean>(false);
   const { valueTheme } = useAppSelector((state) => state.themeSlice);
+  const { registered } = useAppSelector((state) => state.signInAuthSlice);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (activUser === 1) {
+      dispatch(logoutUser());
+    }
+  }, [activUser]);
+
   const arrow = openModalUser ? (
     <MdKeyboardArrowUp
       className={styles.arrow}
@@ -32,16 +41,16 @@ const User = () => {
     <div className={styles.wrapper}>
       <div className={styles.inner}>
         <div className={styles.card}>
-          {registerUser ? (
+          {registered ? (
             <h3 style={{ color: 'white' }}>AA</h3>
           ) : (
             <FiUser className={styles.svg} />
           )}
         </div>
         <div className={styles.user}>
-          {registerUser ? 'User name' : 'Sign in'}
+          {registered ? 'User name' : 'Sign in'}
         </div>
-        {registerUser ? (
+        {registered ? (
           arrow
         ) : (
           <Link to={'signin'}>
@@ -63,7 +72,6 @@ const User = () => {
                 setOpenModalUser(false);
               }}
               className={classNames(styles.item, {
-                [styles.active]: activUser === index,
                 [styles.itemThemeWhite]: valueTheme,
               })}
               key={index}

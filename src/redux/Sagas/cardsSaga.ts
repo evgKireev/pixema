@@ -1,6 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
-import { getCardaApi } from '../../@types/types/cards';
+import { GetCardaApi } from '../../@types/types/cards';
 import {
   getCard,
   getCards,
@@ -9,24 +9,29 @@ import {
   setCard,
   setCards,
   setCardsTrend,
+  setPage,
   setStatusCard,
   setStatusCards,
   setStatusCardsTrends,
   setStatusSuggestions,
   setSuggestions,
+  seTtotalCaunt,
 } from '../cardsSlice';
 import API from '../utils/API';
 
-function* getCardsWorker(actions: PayloadAction<getCardaApi>) {
-  const { query_term, sort_by, genre } = actions.payload;
+function* getCardsWorker(actions: PayloadAction<GetCardaApi>) {
+  const { query_term, sort_by, genre, page, isOverwrite } = actions.payload;
   yield put(setStatusCards('pennding'));
-  const { data, ok, problem, status } = yield call(API.fetchGetCards, {
+  const { data, ok, problem } = yield call(API.fetchGetCards, {
     query_term,
     sort_by,
     genre,
+    page,
+    isOverwrite,
   });
   if (ok && data) {
-    yield put(setCards(data.data.movies));
+    yield put(setCards({ cards: data.data.movies, isOverwrite }));
+    yield put(seTtotalCaunt(data.data.movie_count));
     yield put(setStatusCards('fulfilled'));
   } else {
     console.warn(problem);

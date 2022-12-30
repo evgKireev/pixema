@@ -12,7 +12,7 @@ import {
   setUserGenre,
   setValueTabs,
 } from '../../redux/filtersSlice';
-import { getCards } from '../../redux/cardsSlice';
+import { getCards, setCards, setPage } from '../../redux/cardsSlice';
 
 type FilterModalType = {
   refSvg: { current: null };
@@ -26,6 +26,8 @@ const FilterModal: React.FC<FilterModalType> = ({ refSvg }) => {
   const { inputValue } = useAppSelector((state) => state.filtersSlice);
   const { selectGenre } = useAppSelector((state) => state.filtersSlice);
   const { valueTheme } = useAppSelector((state) => state.themeSlice);
+  const { page } = useAppSelector((state) => state.cardsSlice);
+  const { cards } = useAppSelector((state) => state.cardsSlice);
   const modalFilter = useRef(null);
   const dispatch = useAppDispatch();
   const genreString = selectGenre.join('&');
@@ -247,6 +249,8 @@ const FilterModal: React.FC<FilterModalType> = ({ refSvg }) => {
                 query_term: '',
                 sort_by: '',
                 genre: '',
+                page,
+                isOverwrite: false,
               })
             );
           }}
@@ -258,15 +262,18 @@ const FilterModal: React.FC<FilterModalType> = ({ refSvg }) => {
         <Button
           title={'Show results'}
           type={ButtonTypeEnum.Primary}
-          onClick={() =>
+          onClick={() => {
             dispatch(
               getCards({
                 query_term: inputValue,
                 sort_by: valueTabs,
                 genre: genreString,
+                page,
+                isOverwrite: true,
               })
-            )
-          }
+            );
+            dispatch(setPage(1));
+          }}
           disabled={false}
           className={styles.btnFilter}
         />

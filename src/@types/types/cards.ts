@@ -1,3 +1,8 @@
+export type CardsType = {
+  isOverwrite: boolean;
+  cards: CardType[];
+};
+
 export type CardType = {
   id: number;
   url: string;
@@ -22,12 +27,12 @@ export type CardType = {
   medium_cover_image: string;
   large_cover_image: string;
   state: string;
-  torrents: torrensType[];
+  torrents: TorrensType[];
   date_uploaded: string;
   date_uploaded_unix: number;
 };
 
-type torrensType = {
+type TorrensType = {
   url: string;
   hash: string;
   quality: string;
@@ -40,9 +45,11 @@ type torrensType = {
   date_uploaded_unix: number;
 };
 
-export type getCardaApi = {
+
+export type GetCardaApi = {
   query_term: string;
   sort_by: string;
-  genre:string
+  genre: string;
+  page: number;
+  isOverwrite: boolean;
 };
-
