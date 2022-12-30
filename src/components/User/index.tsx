@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React, { useEffect } from 'react';
 import { FiUser } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { logoutUser } from '../../redux/signInAuthSlice';
 import styles from './User.module.scss';
@@ -10,6 +10,7 @@ import {
   MdKeyboardArrowRight,
   MdKeyboardArrowUp,
 } from 'react-icons/md';
+import { setValueCategories } from '../../redux/categoriesSlice';
 
 const User = () => {
   const userActive = ['Edit profile', 'Log Out'];
@@ -17,14 +18,18 @@ const User = () => {
   const [openModalUser, setOpenModalUser] = React.useState<boolean>(false);
   const { valueTheme } = useAppSelector((state) => state.themeSlice);
   const { registered } = useAppSelector((state) => state.signInAuthSlice);
+  const { userInfo } = useAppSelector((state) => state.signInAuthSlice);
   const dispatch = useAppDispatch();
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (activUser === 1) {
       dispatch(logoutUser());
+    } else if (activUser === 0) {
+      navigate('/settings');
+      dispatch(setValueCategories(3));
+      setActiveUser(null);
     }
   }, [activUser]);
-
   const arrow = openModalUser ? (
     <MdKeyboardArrowUp
       className={styles.arrow}
@@ -42,13 +47,15 @@ const User = () => {
       <div className={styles.inner}>
         <div className={styles.card}>
           {registered ? (
-            <h3 style={{ color: 'white' }}>AA</h3>
+            <h3 style={{ color: 'white' }}>
+              {userInfo?.name[0].toLocaleUpperCase()}
+            </h3>
           ) : (
             <FiUser className={styles.svg} />
           )}
         </div>
         <div className={styles.user}>
-          {registered ? 'User name' : 'Sign in'}
+          {registered ? userInfo?.name : 'Sign in'}
         </div>
         {registered ? (
           arrow

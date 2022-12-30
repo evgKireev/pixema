@@ -3,6 +3,10 @@ export type CardsType = {
   cards: CardType[];
 };
 
+export type CardsTrendType = {
+  cardsTrends: CardType[];
+};
+
 export type CardType = {
   id: number;
   url: string;
@@ -45,11 +49,14 @@ type TorrensType = {
   date_uploaded_unix: number;
 };
 
-
 export type GetCardaApi = {
   query_term: string;
   sort_by: string;
   genre: string;
   page: number;
   isOverwrite: boolean;
+};
+
+export type GetCardsTrendApi = {
+  pageTrends: number;
 };

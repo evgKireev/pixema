@@ -1,6 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
-import { TOKEN_KEY } from '../../@types/constant';
+import { ID_KEY, TOKEN_KEY } from '../../@types/constant';
 import { toast } from 'react-toastify';
 import {
   RegisterUserPayload,
@@ -8,9 +8,11 @@ import {
 } from '../../@types/types/auth';
 import {
   getSignInUser,
+  getUser,
   logoutUser,
   setRegistered,
   setStatusSignIn,
+  setUserInfo,
 } from '../signInAuthSlice';
 import { getRegisterUser, setStatusRegisterUser } from '../signUpAuthSlice';
 import API from './/../utils/API';
@@ -47,6 +49,7 @@ function* signInUserWorker(action: PayloadAction<SignInUserPayload>) {
   if (ok && data) {
     yield put(setStatusSignIn('fullfild'));
     localStorage.setItem(TOKEN_KEY, data.user.access_token);
+    localStorage.setItem(ID_KEY, data.user.id);
     yield put(setRegistered(true));
     callback();
     toast.success('Signed in!');
@@ -58,10 +61,25 @@ function* signInUserWorker(action: PayloadAction<SignInUserPayload>) {
 function* logoutUserWorker() {
   yield put(setRegistered(false));
   localStorage.removeItem(TOKEN_KEY);
+  localStorage.removeItem(ID_KEY);
+}
+
+function* getUserMeWorker() {
+  const access_token = localStorage.getItem(TOKEN_KEY) || '';
+  const idUser = localStorage.getItem(ID_KEY) || '';
+  const { data, ok } = yield call(API.getUserMe, access_token, idUser);
+  if (ok && data) {
+    yield put(
+      setUserInfo({ mail: data.user.email, name: data.user.display_name })
+    );
+  } else {
+    toast.error('Error while getting user info');
+  }
 }
 
 export default function* authSaga() {
   yield all([takeLatest(getRegisterUser, registerUserWorker)]);
   yield all([takeLatest(getSignInUser, signInUserWorker)]);
   yield all([takeLatest(logoutUser, logoutUserWorker)]);
+  yield all([takeLatest(getUser, getUserMeWorker)]);
 }

@@ -1,6 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
-import { GetCardaApi } from '../../@types/types/cards';
+import { GetCardaApi, GetCardsTrendApi } from '../../@types/types/cards';
 import {
   getCard,
   getCards,
@@ -39,9 +39,10 @@ function* getCardsWorker(actions: PayloadAction<GetCardaApi>) {
   }
 }
 
-function* getCardsTrendsWorker() {
+function* getCardsTrendsWorker(actions: PayloadAction<GetCardsTrendApi>) {
+  const { pageTrends } = actions.payload;
   yield put(setStatusCardsTrends('pennding'));
-  const { data, ok, problem } = yield call(API.fetchGetCardsTrends);
+  const { data, ok, problem } = yield call(API.fetchGetCardsTrends, pageTrends);
   if (ok && data) {
     yield put(setCardsTrend(data.data.movies));
     yield put(setStatusCardsTrends('fulfilled'));

@@ -1,13 +1,18 @@
 import classNames from 'classnames';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button, { ButtonTypeEnum } from '../../components/Button';
 import Input from '../../components/Input';
 import Switch from '../../components/Switch';
-import { useAppSelector } from '../../redux/hooks';
+import { setValueCategories } from '../../redux/categoriesSlice';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import styles from './Settings.module.scss';
 
 const Settings = () => {
   const { valueTheme } = useAppSelector((state) => state.themeSlice);
+  const { userInfo } = useAppSelector((state) => state.signInAuthSlice);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   useEffect(() => {
     localStorage.setItem('theme', JSON.stringify(valueTheme));
   }, [valueTheme]);
@@ -26,7 +31,7 @@ const Settings = () => {
               [styles.ThemeWhite]: valueTheme,
             })}
           >
-            {'Artem Lapitsky'}
+            {userInfo?.name}
           </div>
         </div>
         <div className={styles.item}>
@@ -36,7 +41,7 @@ const Settings = () => {
               [styles.ThemeWhite]: valueTheme,
             })}
           >
-            {'a.lapitsky@gmail.com'}
+            {userInfo?.mail}
           </div>
         </div>
       </div>
@@ -94,7 +99,11 @@ const Settings = () => {
         <Button
           title={'Cancel'}
           type={ButtonTypeEnum.Secondary}
-          onClick={() => {}}
+          onClick={() => {
+            navigate('/');
+            dispatch(setValueCategories(0));
+            window.scrollTo(0, 0);
+          }}
           disabled={false}
           className={''}
         />

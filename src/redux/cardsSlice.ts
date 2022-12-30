@@ -1,5 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CardsType, CardType, GetCardaApi } from '../@types/types/cards';
+import {
+  CardsTrendType,
+  CardsType,
+  CardType,
+  GetCardaApi,
+  GetCardsTrendApi,
+} from '../@types/types/cards';
 import { getCartLS } from './utils/getCardsFavoritesLS';
 
 type initialStateType = {
@@ -16,6 +22,7 @@ type initialStateType = {
   statusSuggestions: string;
   searchValue: string;
   page: number;
+  pageTrends: number;
   isOverGlobal: boolean;
   totalCaunt: number;
 };
@@ -35,6 +42,7 @@ const initialState: initialStateType = {
   statusCardsTrends: '',
   searchValue: '',
   page: 1,
+  pageTrends: 1,
   isOverGlobal: false,
   totalCaunt: 0,
 };
@@ -45,7 +53,7 @@ const cardsSlice = createSlice({
   reducers: {
     getCards: (state, actions: PayloadAction<GetCardaApi>) => {},
     getCard: (state, actions: PayloadAction<string | undefined>) => {},
-    getCardsTrend: (state, actions: PayloadAction<string | undefined>) => {},
+    getCardsTrend: (state, actions: PayloadAction<GetCardsTrendApi>) => {},
     getSuggestions: (state, actions: PayloadAction<string | undefined>) => {},
     setCards: (state, actions: PayloadAction<CardsType>) => {
       const { isOverwrite, cards } = actions.payload;
@@ -59,8 +67,10 @@ const cardsSlice = createSlice({
     setCard: (state, actions: PayloadAction<CardType>) => {
       state.card = actions.payload;
     },
-    setCardsTrend: (state, actions: PayloadAction<CardType[]>) => {
-      state.cardsTrends = actions.payload;
+    setCardsTrend(state, actions: PayloadAction<CardType[]>) {
+      const cardsTrends = actions.payload;
+      state.cardsTrends = [...state.cardsTrends, ...cardsTrends];
+      console.log(state.cardsTrends);
     },
     setSuggestions: (state, actions: PayloadAction<CardType[]>) => {
       state.cardSuggestions = actions.payload;
@@ -94,6 +104,9 @@ const cardsSlice = createSlice({
     setPage: (state, actions: PayloadAction<number>) => {
       state.page = actions.payload;
     },
+    setPageTrends: (state, actions: PayloadAction<number>) => {
+      state.pageTrends = actions.payload;
+    },
     seTtotalCaunt: (state, actions: PayloadAction<number>) => {
       state.totalCaunt = actions.payload;
     },
@@ -115,6 +128,7 @@ export const {
   setStatusCardsTrends,
   setCardsFavorites,
   setPage,
+  setPageTrends,
   seTtotalCaunt,
 } = cardsSlice.actions;
 export default cardsSlice.reducer;

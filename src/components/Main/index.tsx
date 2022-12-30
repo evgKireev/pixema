@@ -1,5 +1,10 @@
 import { useEffect } from 'react';
-import { getCards, getCardsTrend, setPage } from '../../redux/cardsSlice';
+import {
+  getCards,
+  getCardsTrend,
+  setPage,
+  setPageTrends,
+} from '../../redux/cardsSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Card from '../Card';
@@ -19,6 +24,7 @@ const Main = () => {
   const { valueTabs } = useAppSelector((state) => state.filtersSlice);
   const { selectGenre } = useAppSelector((state) => state.filtersSlice);
   const { page } = useAppSelector((state) => state.cardsSlice);
+  const { pageTrends } = useAppSelector((state) => state.cardsSlice);
   const { cards } = useAppSelector((state) => state.cardsSlice);
   const { cardsFilter } = useAppSelector((state) => state.cardsSlice);
   const { cardsSearch } = useAppSelector((state) => state.cardsSlice);
@@ -26,31 +32,43 @@ const Main = () => {
   const dispatch = useAppDispatch();
   const genreString = selectGenre.join('&');
   useEffect(() => {
-    if (!isOverGlobal) {
-      dispatch(
-        getCards({
-          query_term: searchValue,
-          sort_by: '',
-          genre: '',
-          page,
-          isOverwrite: false,
-        })
-      );
-    } else {
-      dispatch(
-        getCards({
-          query_term: inputValue,
-          sort_by: valueTabs,
-          genre: genreString,
-          page,
-          isOverwrite: true,
-        })
-      );
+    if (valueCategories === 0) {
+      if (!isOverGlobal) {
+        dispatch(
+          getCards({
+            query_term: searchValue,
+            sort_by: '',
+            genre: '',
+            page,
+            isOverwrite: false,
+          })
+        );
+      } else {
+        dispatch(
+          getCards({
+            query_term: inputValue,
+            sort_by: valueTabs,
+            genre: genreString,
+            page,
+            isOverwrite: true,
+          })
+        );
+      }
     }
-    dispatch(getCardsTrend());
-    localStorage.setItem('cart', JSON.stringify(cardsFavorites));
-  }, [searchValue, page, inputValue, valueTabs, genreString]);
 
+    if (valueCategories === 1) {
+      dispatch(getCardsTrend({ pageTrends }));
+    }
+    localStorage.setItem('cart', JSON.stringify(cardsFavorites));
+  }, [
+    searchValue,
+    page,
+    inputValue,
+    valueTabs,
+    genreString,
+    pageTrends,
+    valueCategories,
+  ]);
   const getCardsCheck = () => {
     if (valueCategories === 1) {
       return cardsTrends;
@@ -66,7 +84,11 @@ const Main = () => {
   };
   const cardsArray = getCardsCheck();
   const onScroll = () => {
-    dispatch(setPage(page + 1));
+    if (valueCategories === 1) {
+      dispatch(setPageTrends(pageTrends + 1));
+    } else if (valueCategories === 0) {
+      dispatch(setPage(page + 1));
+    }
   };
   const hasMore = cardsArray.length < totalCaunt;
 

@@ -20,3 +20,8 @@ export type SignInUserPayload = {
   datas: SingInUserType;
   callback: () => void;
 };
+
+export type UserInfoType = {
+  mail: string;
+  name: string;
+};

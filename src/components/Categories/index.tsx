@@ -16,14 +16,24 @@ import styles from './Categories.module.scss';
 
 const Categories = () => {
   const { valueCategories } = useAppSelector((state) => state.categoriesSlice);
+  const { registered } = useAppSelector((state) => state.signInAuthSlice);
   const { page } = useAppSelector((state) => state.cardsSlice);
-
   const dispatch = useAppDispatch();
   const categories = [
     { name: 'Home', icon: <RiHome6Fill />, link: '/' },
     { name: 'Trends', icon: <AiFillFire />, link: '' },
-    { name: 'Favorites', icon: <BsFillBookmarkFill />, link: '' },
-    { name: 'Settings', icon: <MdSettings />, link: 'settings' },
+    {
+      name: 'Favorites',
+      icon: <BsFillBookmarkFill />,
+      link: '',
+      disabled: false,
+    },
+    {
+      name: 'Settings',
+      icon: <MdSettings />,
+      link: 'settings',
+      disabled: false,
+    },
   ];
   return (
     <>
@@ -32,6 +42,7 @@ const Categories = () => {
           <div
             className={classNames(styles.item, {
               [styles.active]: valueCategories === index,
+              [styles.disabled]: item.disabled === registered,
             })}
             key={index}
             onClick={() => {

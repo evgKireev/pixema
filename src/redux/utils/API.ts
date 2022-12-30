@@ -10,8 +10,10 @@ const fetchGetCards = ({ query_term, sort_by, genre, page }: GetCardaApi) => {
   });
 };
 
-const fetchGetCardsTrends = () => {
-  return API.get(`v2/list_movies.json?minimum_rating=8.6`);
+const fetchGetCardsTrends = (pageTrends: number) => {
+  return API.get(
+    `v2/list_movies.json?${limitCards}&minimum_rating=8.6&page=${pageTrends}`
+  );
 };
 
 const fetchGetCard = (id: string) => {
@@ -44,6 +46,16 @@ const signInUser = ({ email, password, token_name }: SingInUserType) => {
   });
 };
 
+const getUserMe = (access_token: string, idUser: string) => {
+  return API_AUTH.get(
+    `user-profile/${idUser}`,
+    {},
+    {
+      headers: { Authorization: `Bearer ${access_token}` },
+    }
+  );
+};
+
 export default {
   fetchGetCards,
   fetchGetCard,
@@ -51,4 +63,5 @@ export default {
   fetchGetCardsTrends,
   registerUser,
   signInUser,
+  getUserMe,
 };

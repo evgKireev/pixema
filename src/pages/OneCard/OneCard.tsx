@@ -22,6 +22,7 @@ const OneCard = () => {
   const { statusCards } = useAppSelector((state) => state.cardsSlice);
   const { cardsFavorites } = useAppSelector((state) => state.cardsSlice);
   const { valueTheme } = useAppSelector((state) => state.themeSlice);
+  const { registered } = useAppSelector((state) => state.signInAuthSlice);
   const rating = card?.rating;
   const isBookmark =
     cardsFavorites.findIndex((value) => value.id === card?.id) > -1;
@@ -50,6 +51,7 @@ const OneCard = () => {
                 <BsFillBookmarkFill
                   className={classNames(styles.bookmark, {
                     [styles.isBookmark]: isBookmark,
+                    [styles.disabled]: !registered,
                   })}
                   onClick={() => {
                     if (card) {

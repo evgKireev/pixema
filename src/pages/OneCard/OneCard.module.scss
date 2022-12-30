@@ -149,3 +149,8 @@
     background-color: #afb2b6;
   }
 }
+
+.disabled {
+  opacity: 40%;
+  pointer-events: none;
+}

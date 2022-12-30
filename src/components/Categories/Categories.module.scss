@@ -44,3 +44,8 @@
     color: $acsent;
   }
 }
+
+.disabled{
+  opacity: 40%;
+  pointer-events: none;
+}
