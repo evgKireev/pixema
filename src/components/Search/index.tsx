@@ -1,7 +1,11 @@
 import SearchList from '../../assets/img/Search/SearchList';
 import SearchListActive from '../../assets/img/Search/SearchListActive';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { getCards, setSearchValue } from '../../redux/cardsSlice';
+import {
+  getCards,
+  getCardsSearch,
+  setSearchValue,
+} from '../../redux/cardsSlice';
 import debounce from 'lodash.debounce';
 import { useCallback, useEffect, useState } from 'react';
 import classNames from 'classnames';
@@ -13,38 +17,38 @@ const Search: React.FC = () => {
   const [disabled, setDisabled] = useState(false);
   const { valueTheme } = useAppSelector((state) => state.themeSlice);
   const { valueCategories } = useAppSelector((state) => state.categoriesSlice);
-  const { page } = useAppSelector((state) => state.cardsSlice);
-  const dispatch = useAppDispatch();
+  const { searchValue } = useAppSelector((state) => state.cardsSlice);
   const { pathname } = useLocation();
+  const dispatch = useAppDispatch();
+
 
   const updateSearchValue = useCallback(
     debounce((str) => {
-      // dispatch(setSearchValue(str));
-      dispatch(
-        getCards({
-          query_term: str,
-          sort_by: '',
-          genre: '',
-          page,
-          isOverwrite: true,
-        })
-      );
+      dispatch(setSearchValue(str));
     }, 1000),
     []
   );
+
   useEffect(() => {
-    if (pathname !== '/') {
-      dispatch(setSearchValue(''));
-      setInpValue('');
+    if (searchValue) {
+      dispatch(
+        getCardsSearch({
+          query_term: searchValue,
+        })
+      );
     }
-    if (valueCategories !== 0) {
-      setDisabled(true);
-      dispatch(setSearchValue(''));
-      setInpValue('');
-    } else {
-      setDisabled(false);
-    }
-  }, [pathname, disabled, valueCategories]);
+    // if (pathname !== '/') {
+    //   dispatch(setSearchValue(''));
+    //   setInpValue('');
+    // }
+    // if (valueCategories !== 0) {
+    //   setDisabled(true);
+    //   dispatch(setSearchValue(''));
+    //   setInpValue('');
+    // } else {
+    //   setDisabled(false);
+    // }
+  }, [pathname, disabled, valueCategories, searchValue]);
   return (
     <div className={styles.wrapper}>
       <input

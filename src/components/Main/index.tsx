@@ -1,10 +1,4 @@
 import { useEffect } from 'react';
-import {
-  getCards,
-  getCardsTrend,
-  setPage,
-  setPageTrends,
-} from '../../redux/cardsSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Card from '../Card';
@@ -12,15 +6,20 @@ import NoInfo from '../NoInfo';
 import styles from './Main.module.scss';
 import LoadingPogination from '../LoadingPagination';
 import Loader from '../Loader';
+import {
+  getCards,
+  getCardsTrend,
+  setPage,
+  setPageTrends,
+} from '../../redux/cardsSlice';
 
 const Main = () => {
   const { isOverGlobal } = useAppSelector((state) => state.cardsSlice);
   const { cardsTrends } = useAppSelector((state) => state.cardsSlice);
   const { statusCards } = useAppSelector((state) => state.cardsSlice);
+  const { statusCardsSearch } = useAppSelector((state) => state.cardsSlice);
   const { valueCategories } = useAppSelector((state) => state.categoriesSlice);
-  const { searchValue } = useAppSelector((state) => state.cardsSlice);
   const { cardsFavorites } = useAppSelector((state) => state.cardsSlice);
-  const { inputValue } = useAppSelector((state) => state.filtersSlice);
   const { valueTabs } = useAppSelector((state) => state.filtersSlice);
   const { selectGenre } = useAppSelector((state) => state.filtersSlice);
   const { page } = useAppSelector((state) => state.cardsSlice);
@@ -29,14 +28,16 @@ const Main = () => {
   const { cardsFilter } = useAppSelector((state) => state.cardsSlice);
   const { cardsSearch } = useAppSelector((state) => state.cardsSlice);
   const { totalCaunt } = useAppSelector((state) => state.cardsSlice);
-  const dispatch = useAppDispatch();
+  const { searchValue } = useAppSelector((state) => state.cardsSlice);
   const genreString = selectGenre.join('&');
+
+  const dispatch = useAppDispatch();
   useEffect(() => {
     if (valueCategories === 0) {
       if (!isOverGlobal) {
         dispatch(
           getCards({
-            query_term: searchValue,
+            query_term: '',
             sort_by: '',
             genre: '',
             page,
@@ -46,7 +47,7 @@ const Main = () => {
       } else {
         dispatch(
           getCards({
-            query_term: inputValue,
+            query_term: '',
             sort_by: valueTabs,
             genre: genreString,
             page,
@@ -55,20 +56,11 @@ const Main = () => {
         );
       }
     }
-
     if (valueCategories === 1) {
       dispatch(getCardsTrend({ pageTrends }));
     }
     localStorage.setItem('cart', JSON.stringify(cardsFavorites));
-  }, [
-    searchValue,
-    page,
-    inputValue,
-    valueTabs,
-    genreString,
-    pageTrends,
-    valueCategories,
-  ]);
+  }, [page, valueTabs, genreString, pageTrends, valueCategories]);
   const getCardsCheck = () => {
     if (valueCategories === 1) {
       return cardsTrends;
@@ -78,7 +70,11 @@ const Main = () => {
       if (isOverGlobal) {
         return cardsFilter;
       } else {
-        return cards;
+        if (searchValue) {
+          return cardsSearch;
+        } else {
+          return cards;
+        }
       }
     }
   };
@@ -90,7 +86,13 @@ const Main = () => {
       dispatch(setPage(page + 1));
     }
   };
-  const hasMore = cardsArray.length < totalCaunt;
+  const hasMore = () => {
+    if (valueCategories === 2 || cardsArray.length === 0 || searchValue) {
+      return false;
+    } else {
+      return cardsArray.length < totalCaunt;
+    }
+  };
 
   if (statusCards === 'rejected')
     return (
@@ -105,12 +107,16 @@ const Main = () => {
       </div>
     );
 
+  if (statusCardsSearch === 'pennding') {
+    return <Loader />;
+  }
+
   return (
     <div className={styles.wrapper}>
       <InfiniteScroll
         dataLength={cardsArray.length}
         next={onScroll}
-        hasMore={hasMore}
+        hasMore={hasMore()}
         loader={<LoadingPogination />}
         scrollThreshold={0.9}
       >

@@ -1,17 +1,24 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
-import { GetCardaApi, GetCardsTrendApi } from '../../@types/types/cards';
+import {
+  GetCardaApi,
+  GetCardsSearchApi,
+  GetCardsTrendApi,
+} from '../../@types/types/cards';
 import {
   getCard,
   getCards,
+  getCardsSearch,
   getCardsTrend,
   getSuggestions,
   setCard,
   setCards,
+  setCardsSearch,
   setCardsTrend,
   setPage,
   setStatusCard,
   setStatusCards,
+  setStatusCardsSearch,
   setStatusCardsTrends,
   setStatusSuggestions,
   setSuggestions,
@@ -52,6 +59,19 @@ function* getCardsTrendsWorker(actions: PayloadAction<GetCardsTrendApi>) {
   }
 }
 
+function* getCardsSearchWorker(actions: PayloadAction<GetCardaApi>) {
+  const { query_term } = actions.payload;
+  yield put(setStatusCardsSearch('pennding'));
+  const { data, ok, problem } = yield call(API.fetchGetSearchCards, query_term);
+  if (ok && data) {
+    yield put(setCardsSearch(data.data.movies));
+    yield put(setStatusCardsSearch('fulfilled'));
+  } else {
+    console.warn(problem);
+    yield put(setStatusCardsSearch('rejected'));
+  }
+}
+
 function* getCardWorker(action: PayloadAction<string>) {
   yield put(setStatusCard('pennding'));
   const { data, ok, problem } = yield call(API.fetchGetCard, action.payload);
@@ -85,5 +105,6 @@ export default function* cardsSaga() {
     takeLatest(getCard, getCardWorker),
     takeLatest(getSuggestions, getSuggestionsWorker),
     takeLatest(getCardsTrend, getCardsTrendsWorker),
+    takeLatest(getCardsSearch, getCardsSearchWorker),
   ]);
 }

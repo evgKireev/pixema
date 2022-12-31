@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
-  CardsTrendType,
   CardsType,
   CardType,
   GetCardaApi,
+  GetCardsSearchApi,
   GetCardsTrendApi,
 } from '../@types/types/cards';
 import { getCartLS } from './utils/getCardsFavoritesLS';
@@ -20,6 +20,7 @@ type initialStateType = {
   statusCard: string;
   statusCardsTrends: string;
   statusSuggestions: string;
+  statusCardsSearch: string;
   searchValue: string;
   page: number;
   pageTrends: number;
@@ -40,6 +41,7 @@ const initialState: initialStateType = {
   statusCard: '',
   statusSuggestions: '',
   statusCardsTrends: '',
+  statusCardsSearch: '',
   searchValue: '',
   page: 1,
   pageTrends: 1,
@@ -51,10 +53,11 @@ const cardsSlice = createSlice({
   name: 'cards',
   initialState,
   reducers: {
-    getCards: (state, actions: PayloadAction<GetCardaApi>) => {},
     getCard: (state, actions: PayloadAction<string | undefined>) => {},
+    getCards: (state, actions: PayloadAction<GetCardaApi>) => {},
     getCardsTrend: (state, actions: PayloadAction<GetCardsTrendApi>) => {},
     getSuggestions: (state, actions: PayloadAction<string | undefined>) => {},
+    getCardsSearch: (state, actions: PayloadAction<GetCardsSearchApi>) => {},
     setCards: (state, actions: PayloadAction<CardsType>) => {
       const { isOverwrite, cards } = actions.payload;
       state.isOverGlobal = isOverwrite;
@@ -70,7 +73,13 @@ const cardsSlice = createSlice({
     setCardsTrend(state, actions: PayloadAction<CardType[]>) {
       const cardsTrends = actions.payload;
       state.cardsTrends = [...state.cardsTrends, ...cardsTrends];
-      console.log(state.cardsTrends);
+    },
+    setCardsSearch(state, actions: PayloadAction<CardType[]>) {
+      if (actions.payload) {
+        state.cardsSearch = actions.payload;
+      } else {
+        state.cardsSearch = [];
+      }
     },
     setSuggestions: (state, actions: PayloadAction<CardType[]>) => {
       state.cardSuggestions = actions.payload;
@@ -91,6 +100,9 @@ const cardsSlice = createSlice({
     },
     setStatusCardsTrends: (state, actions: PayloadAction<string>) => {
       state.statusCardsTrends = actions.payload;
+    },
+    setStatusCardsSearch: (state, actions: PayloadAction<string>) => {
+      state.statusCardsSearch = actions.payload;
     },
     setStatusCard: (state, actions: PayloadAction<string>) => {
       state.statusCards = actions.payload;
@@ -130,5 +142,8 @@ export const {
   setPage,
   setPageTrends,
   seTtotalCaunt,
+  getCardsSearch,
+  setCardsSearch,
+  setStatusCardsSearch,
 } = cardsSlice.actions;
 export default cardsSlice.reducer;

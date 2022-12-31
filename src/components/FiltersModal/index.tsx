@@ -27,7 +27,6 @@ const FilterModal: React.FC<FilterModalType> = ({ refSvg }) => {
   const { selectGenre } = useAppSelector((state) => state.filtersSlice);
   const { valueTheme } = useAppSelector((state) => state.themeSlice);
   const { page } = useAppSelector((state) => state.cardsSlice);
-  const { cards } = useAppSelector((state) => state.cardsSlice);
   const modalFilter = useRef(null);
   const dispatch = useAppDispatch();
   const genreString = selectGenre.join('&');
@@ -265,7 +264,7 @@ const FilterModal: React.FC<FilterModalType> = ({ refSvg }) => {
           onClick={() => {
             dispatch(
               getCards({
-                query_term: inputValue,
+                query_term: '',
                 sort_by: valueTabs,
                 genre: genreString,
                 page,

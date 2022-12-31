@@ -60,3 +60,7 @@ export type GetCardaApi = {
 export type GetCardsTrendApi = {
   pageTrends: number;
 };
+
+export type GetCardsSearchApi = {
+  query_term: string;
+};

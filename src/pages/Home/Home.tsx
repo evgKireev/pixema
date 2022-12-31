@@ -20,8 +20,6 @@ const Home = () => {
       dispatch(getUser());
     }
   }, [registered]);
-  const d = window.scrollTo(0, 0);
-  console.log(d);
   return (
     <>
       <Header />

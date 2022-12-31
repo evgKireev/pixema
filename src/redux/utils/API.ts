@@ -10,6 +10,10 @@ const fetchGetCards = ({ query_term, sort_by, genre, page }: GetCardaApi) => {
   });
 };
 
+const fetchGetSearchCards = (query_term: string) => {
+  return API.get(`v2/list_movies.json?limit=50&query_term=${query_term}`);
+};
+
 const fetchGetCardsTrends = (pageTrends: number) => {
   return API.get(
     `v2/list_movies.json?${limitCards}&minimum_rating=8.6&page=${pageTrends}`
@@ -64,4 +68,5 @@ export default {
   registerUser,
   signInUser,
   getUserMe,
+  fetchGetSearchCards,
 };
