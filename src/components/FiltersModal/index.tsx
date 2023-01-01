@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 import Button, { ButtonTypeEnum } from '../Button';
 import { IoIosClose, IoMdClose } from 'react-icons/io';
@@ -12,7 +12,7 @@ import {
   setUserGenre,
   setValueTabs,
 } from '../../redux/filtersSlice';
-import { getCards, setCards, setPage } from '../../redux/cardsSlice';
+import { getCards, setCardsFilter, setPage } from '../../redux/cardsSlice';
 
 type FilterModalType = {
   refSvg: { current: null };
@@ -27,9 +27,11 @@ const FilterModal: React.FC<FilterModalType> = ({ refSvg }) => {
   const { selectGenre } = useAppSelector((state) => state.filtersSlice);
   const { valueTheme } = useAppSelector((state) => state.themeSlice);
   const { page } = useAppSelector((state) => state.cardsSlice);
+  const [disabled, setDisabled] = useState(false);
   const modalFilter = useRef(null);
   const dispatch = useAppDispatch();
   const genreString = selectGenre.join('&');
+
   useEffect(() => {
     const eventModalFilter = (e: MouseEvent) => {
       const _e = e as MouseEvent & {
@@ -121,10 +123,10 @@ const FilterModal: React.FC<FilterModalType> = ({ refSvg }) => {
             onClick={() => dispatch(setValueTabs('year'))}
             className={classNames(
               styles.buttonRigth,
+              valueTabs === 'year' ? styles.buttonActive : '',
 
               {
                 [styles.buttonTheme]: valueTheme,
-                [styles.buttonActive]: valueTabs === 'year',
                 [styles.buttonActivetTheme]: valueTabs === 'year' && valueTheme,
               }
             )}
@@ -141,7 +143,7 @@ const FilterModal: React.FC<FilterModalType> = ({ refSvg }) => {
               {
                 [styles.buttonTheme]: valueTheme,
                 [styles.buttonActivetTheme]:
-                  valueTabs === ' like_count' && valueTheme,
+                  valueTabs === 'like_count' && valueTheme,
               }
             )}
           >
@@ -149,15 +151,13 @@ const FilterModal: React.FC<FilterModalType> = ({ refSvg }) => {
           </div>
           <div
             onClick={() => dispatch(setValueTabs('date_added'))}
-            className={classNames(
-              styles.buttonRigth,
-              valueTabs === 'date_added' ? styles.buttonActive : '',
-              {
-                [styles.buttonTheme]: valueTheme,
-                [styles.buttonActivetTheme]:
-                  valueTabs === 'date_added' && valueTheme,
-              }
-            )}
+            className={classNames(styles.buttonRigth, {
+              [styles.buttonTheme]: valueTheme,
+              [styles.buttonActive]: valueTabs === 'date_added',
+
+              [styles.buttonActivetTheme]:
+                valueTabs === 'date_added' && valueTheme,
+            })}
           >
             Date added
           </div>
@@ -243,6 +243,8 @@ const FilterModal: React.FC<FilterModalType> = ({ refSvg }) => {
             dispatch(setValueTabs('year'));
             dispatch(setInputValue(''));
             dispatch(setUserGenre(''));
+            dispatch(setCardsFilter([]));
+            setDisabled(false);
             dispatch(
               getCards({
                 query_term: '',
@@ -264,7 +266,7 @@ const FilterModal: React.FC<FilterModalType> = ({ refSvg }) => {
           onClick={() => {
             dispatch(
               getCards({
-                query_term: '',
+                query_term: inputValue,
                 sort_by: valueTabs,
                 genre: genreString,
                 page,
@@ -272,8 +274,9 @@ const FilterModal: React.FC<FilterModalType> = ({ refSvg }) => {
               })
             );
             dispatch(setPage(1));
+            setDisabled(true);
           }}
-          disabled={false}
+          disabled={disabled}
           className={styles.btnFilter}
         />
       </div>

@@ -8,7 +8,7 @@ type initialStateType = {
 };
 
 const initialState: initialStateType = {
-  valueTabs: 'year',
+  valueTabs: 'date_added',
   inputValue: '',
   userGenre: '',
   selectGenre: [],
@@ -44,10 +44,6 @@ const filtersSlice = createSlice({
   },
 });
 
-export const {
-  setValueTabs,
-  setInputValue,
-  setUserGenre,
-  setSelectGenre,
-} = filtersSlice.actions;
+export const { setValueTabs, setInputValue, setUserGenre, setSelectGenre } =
+  filtersSlice.actions;
 export default filtersSlice.reducer;

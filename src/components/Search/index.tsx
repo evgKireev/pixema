@@ -21,7 +21,6 @@ const Search: React.FC = () => {
   const { pathname } = useLocation();
   const dispatch = useAppDispatch();
 
-
   const updateSearchValue = useCallback(
     debounce((str) => {
       dispatch(setSearchValue(str));
@@ -37,17 +36,17 @@ const Search: React.FC = () => {
         })
       );
     }
-    // if (pathname !== '/') {
-    //   dispatch(setSearchValue(''));
-    //   setInpValue('');
-    // }
-    // if (valueCategories !== 0) {
-    //   setDisabled(true);
-    //   dispatch(setSearchValue(''));
-    //   setInpValue('');
-    // } else {
-    //   setDisabled(false);
-    // }
+    if (pathname !== '/') {
+      dispatch(setSearchValue(''));
+      setInpValue('');
+    }
+    if (valueCategories !== 0) {
+      setDisabled(true);
+      dispatch(setSearchValue(''));
+      setInpValue('');
+    } else {
+      setDisabled(false);
+    }
   }, [pathname, disabled, valueCategories, searchValue]);
   return (
     <div className={styles.wrapper}>

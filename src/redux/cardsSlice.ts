@@ -62,11 +62,16 @@ const cardsSlice = createSlice({
       const { isOverwrite, cards } = actions.payload;
       state.isOverGlobal = isOverwrite;
       if (isOverwrite) {
+        state.cards = [];
         state.cardsFilter = [...state.cardsFilter, ...cards];
       } else {
         state.cards = [...state.cards, ...cards];
       }
     },
+    setCardsFilter: (state, actions: PayloadAction<CardType[]>) => {
+      state.cardsFilter = actions.payload;
+    },
+
     setCard: (state, actions: PayloadAction<CardType>) => {
       state.card = actions.payload;
     },
@@ -145,5 +150,6 @@ export const {
   getCardsSearch,
   setCardsSearch,
   setStatusCardsSearch,
+  setCardsFilter,
 } = cardsSlice.actions;
 export default cardsSlice.reducer;

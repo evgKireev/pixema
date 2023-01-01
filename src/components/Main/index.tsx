@@ -29,6 +29,7 @@ const Main = () => {
   const { cardsSearch } = useAppSelector((state) => state.cardsSlice);
   const { totalCaunt } = useAppSelector((state) => state.cardsSlice);
   const { searchValue } = useAppSelector((state) => state.cardsSlice);
+  const { inputValue } = useAppSelector((state) => state.filtersSlice);
   const genreString = selectGenre.join('&');
 
   const dispatch = useAppDispatch();
@@ -47,7 +48,7 @@ const Main = () => {
       } else {
         dispatch(
           getCards({
-            query_term: '',
+            query_term: inputValue,
             sort_by: valueTabs,
             genre: genreString,
             page,
@@ -60,7 +61,7 @@ const Main = () => {
       dispatch(getCardsTrend({ pageTrends }));
     }
     localStorage.setItem('cart', JSON.stringify(cardsFavorites));
-  }, [page, valueTabs, genreString, pageTrends, valueCategories]);
+  }, [page, pageTrends, valueCategories]);
   const getCardsCheck = () => {
     if (valueCategories === 1) {
       return cardsTrends;
