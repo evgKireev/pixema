@@ -13,7 +13,7 @@ export type SingInUserType = {
 
 export type RegisterUserPayload = {
   datas: RegisterUserType;
-  callback: () => void;
+  callback: (link: string) => void;
 };
 
 export type SignInUserPayload = {

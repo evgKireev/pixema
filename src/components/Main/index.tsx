@@ -9,22 +9,25 @@ import Loader from '../Loader';
 import {
   getCards,
   getCardsTrend,
+  setCardsRender,
   setPage,
   setPageTrends,
 } from '../../redux/cardsSlice';
 
 const Main = () => {
   const { isOverGlobal } = useAppSelector((state) => state.cardsSlice);
-  const { cardsTrends } = useAppSelector((state) => state.cardsSlice);
   const { statusCards } = useAppSelector((state) => state.cardsSlice);
   const { statusCardsSearch } = useAppSelector((state) => state.cardsSlice);
+  const { statusCardsTrends } = useAppSelector((state) => state.cardsSlice);
+  const { statusSuggestions } = useAppSelector((state) => state.cardsSlice);
   const { valueCategories } = useAppSelector((state) => state.categoriesSlice);
   const { cardsFavorites } = useAppSelector((state) => state.cardsSlice);
   const { valueTabs } = useAppSelector((state) => state.filtersSlice);
   const { selectGenre } = useAppSelector((state) => state.filtersSlice);
   const { page } = useAppSelector((state) => state.cardsSlice);
   const { pageTrends } = useAppSelector((state) => state.cardsSlice);
-  const { cards } = useAppSelector((state) => state.cardsSlice);
+  const { cardsRender } = useAppSelector((state) => state.cardsSlice);
+  const { cardsTrendsRender } = useAppSelector((state) => state.cardsSlice);
   const { cardsFilter } = useAppSelector((state) => state.cardsSlice);
   const { cardsSearch } = useAppSelector((state) => state.cardsSlice);
   const { totalCaunt } = useAppSelector((state) => state.cardsSlice);
@@ -64,7 +67,7 @@ const Main = () => {
   }, [page, pageTrends, valueCategories]);
   const getCardsCheck = () => {
     if (valueCategories === 1) {
-      return cardsTrends;
+      return cardsTrendsRender;
     } else if (valueCategories === 2) {
       return cardsFavorites;
     } else {
@@ -74,7 +77,7 @@ const Main = () => {
         if (searchValue) {
           return cardsSearch;
         } else {
-          return cards;
+          return cardsRender;
         }
       }
     }
@@ -109,6 +112,12 @@ const Main = () => {
     );
 
   if (statusCardsSearch === 'pennding') {
+    return <Loader />;
+  }
+  if (statusCards === 'pennding' && !cardsArray.length) {
+    return <Loader />;
+  }
+  if (statusCardsTrends === 'pennding' && !cardsArray.length) {
     return <Loader />;
   }
 

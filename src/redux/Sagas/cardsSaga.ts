@@ -2,7 +2,6 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import {
   GetCardaApi,
-  GetCardsSearchApi,
   GetCardsTrendApi,
 } from '../../@types/types/cards';
 import {
@@ -15,7 +14,6 @@ import {
   setCards,
   setCardsSearch,
   setCardsTrend,
-  setPage,
   setStatusCard,
   setStatusCards,
   setStatusCardsSearch,

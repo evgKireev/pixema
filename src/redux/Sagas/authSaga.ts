@@ -21,7 +21,7 @@ function* registerUserWorker(action: PayloadAction<RegisterUserPayload>) {
   yield put(setStatusRegisterUser('pending'));
   const { datas, callback } = action.payload;
   const { email, password, password_confirmation, purchase_code } = datas;
-  const { data, ok, problem } = yield call(API.registerUser, {
+  const { data, ok } = yield call(API.registerUser, {
     email,
     password,
     password_confirmation,
@@ -30,10 +30,18 @@ function* registerUserWorker(action: PayloadAction<RegisterUserPayload>) {
   if (ok && data) {
     yield put(setStatusRegisterUser('fulfild'));
     localStorage.setItem(TOKEN_KEY, data.bootstrapData);
-    callback();
+    callback('/signin');
     toast.success('Registration was successful!');
   } else {
-    toast.error('Error while registering');
+    yield put(setStatusRegisterUser('rejected'));
+    toast.error(
+      data.errors.email ? `${data.message}(${data.errors.email[0]})` : null
+    );
+    toast.error(
+      data.errors.password
+        ? `${data.message}(${data.errors.password[0]})`
+        : null
+    );
   }
 }
 
@@ -54,7 +62,15 @@ function* signInUserWorker(action: PayloadAction<SignInUserPayload>) {
     callback();
     toast.success('Signed in!');
   } else {
-    toast.error('Error while sign in: ', problem);
+    yield put(setStatusSignIn('rejected'));
+    toast.error(
+      data.errors.email ? `${data.message}(${data.errors.email[0]})` : null
+    );
+    toast.error(
+      data.errors.password
+        ? `${data.message}(${data.errors.password[0]})`
+        : null
+    );
   }
 }
 

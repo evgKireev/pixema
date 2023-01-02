@@ -10,6 +10,8 @@ import { getCartLS } from './utils/getCardsFavoritesLS';
 
 type initialStateType = {
   cards: CardType[];
+  cardsRender: CardType[];
+  cardsTrendsRender: CardType[];
   card: CardType | null;
   cardSuggestions: CardType[];
   cardsTrends: CardType[];
@@ -31,6 +33,8 @@ type initialStateType = {
 const { cardsFavorites } = getCartLS();
 const initialState: initialStateType = {
   cards: [],
+  cardsRender: [],
+  cardsTrendsRender: [],
   card: null,
   cardSuggestions: [],
   cardsTrends: [],
@@ -65,7 +69,7 @@ const cardsSlice = createSlice({
         state.cards = [];
         state.cardsFilter = [...state.cardsFilter, ...cards];
       } else {
-        state.cards = [...state.cards, ...cards];
+        state.cardsRender = [...state.cardsRender, ...cards];
       }
     },
     setCardsFilter: (state, actions: PayloadAction<CardType[]>) => {
@@ -77,7 +81,7 @@ const cardsSlice = createSlice({
     },
     setCardsTrend(state, actions: PayloadAction<CardType[]>) {
       const cardsTrends = actions.payload;
-      state.cardsTrends = [...state.cardsTrends, ...cardsTrends];
+      state.cardsTrendsRender = [...state.cardsTrendsRender, ...cardsTrends];
     },
     setCardsSearch(state, actions: PayloadAction<CardType[]>) {
       if (actions.payload) {
@@ -85,6 +89,12 @@ const cardsSlice = createSlice({
       } else {
         state.cardsSearch = [];
       }
+    },
+    setCardsRender(state, actions: PayloadAction<CardType[]>) {
+      state.cardsRender = actions.payload;
+    },
+    setCardsTrendRender(state, actions: PayloadAction<CardType[]>) {
+      state.cardsTrendsRender = actions.payload;
     },
     setSuggestions: (state, actions: PayloadAction<CardType[]>) => {
       state.cardSuggestions = actions.payload;
@@ -151,5 +161,7 @@ export const {
   setCardsSearch,
   setStatusCardsSearch,
   setCardsFilter,
+  setCardsRender,
+  setCardsTrendRender,
 } = cardsSlice.actions;
 export default cardsSlice.reducer;

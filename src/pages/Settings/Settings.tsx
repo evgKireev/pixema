@@ -54,7 +54,7 @@ const Settings = () => {
         <div className={styles.item}>
           <span>Password</span>
           <Input
-            disabled={false}
+            disabled={true}
             error={false}
             placeholder={'Your password'}
             onChange={() => {}}
@@ -65,7 +65,7 @@ const Settings = () => {
             <span>New password</span>
             <Input
               onChange={() => {}}
-              disabled={false}
+              disabled={true}
               error={false}
               placeholder={'New password'}
             />
@@ -74,7 +74,7 @@ const Settings = () => {
             <span>Confirm password</span>
             <Input
               onChange={() => {}}
-              disabled={false}
+              disabled={true}
               error={false}
               placeholder={'Confirm password'}
             />

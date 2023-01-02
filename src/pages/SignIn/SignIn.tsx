@@ -23,7 +23,7 @@ const SignIn = () => {
   const navigate = useNavigate();
 
   const validationForm = useMemo(() => {
-    return mailValue.length > 0 && passwordValue.length > 0;
+    return mailValue.length > 5 && passwordValue.length > 5;
   }, [mailValue, passwordValue]);
 
   return (

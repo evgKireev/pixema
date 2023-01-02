@@ -12,7 +12,7 @@ import {
   setUserGenre,
   setValueTabs,
 } from '../../redux/filtersSlice';
-import { getCards, setCardsFilter, setPage } from '../../redux/cardsSlice';
+import { getCards, setCardsFilter, setCardsRender, setPage } from '../../redux/cardsSlice';
 
 type FilterModalType = {
   refSvg: { current: null };
@@ -240,10 +240,12 @@ const FilterModal: React.FC<FilterModalType> = ({ refSvg }) => {
           title={'Clear filter'}
           type={ButtonTypeEnum.Secondary}
           onClick={() => {
-            dispatch(setValueTabs('year'));
+            dispatch(setValueTabs('date_added'));
             dispatch(setInputValue(''));
             dispatch(setUserGenre(''));
             dispatch(setCardsFilter([]));
+            dispatch(setCardsRender([]));
+
             setDisabled(false);
             dispatch(
               getCards({

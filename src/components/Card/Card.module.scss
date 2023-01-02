@@ -3,13 +3,12 @@
   width: 266px;
   position: relative;
   transition: all 0.5s;
-  a {
-    color: #fff;
-  }
-
+  color: #fff;
   &:hover {
     transform: scale(0.9);
     transition: all 0.5s;
+    cursor: pointer;
+    color: $acsent;
   }
 }
 
@@ -34,12 +33,6 @@
   font-weight: 700;
   line-height: 24px;
   cursor: pointer;
-  transition: all 0.5s;
-
-  &:hover {
-    color: $acsent;
-    transition: all 0.5s;
-  }
 }
 
 .genre {
@@ -108,5 +101,3 @@
     color: $acsent;
   }
 }
-
-

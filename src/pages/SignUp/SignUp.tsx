@@ -33,12 +33,11 @@ const SignUp = () => {
   const navigate = useNavigate();
   const validationForm = useMemo(() => {
     return (
-      mailValue.length > 0 &&
-      passwordValue.length > 0 &&
-      passworConfirmdValue.length > 0
+      mailValue.length > 5 &&
+      passwordValue.length > 5 &&
+      passworConfirmdValue.length > 5
     );
   }, [mailValue, passwordValue, passworConfirmdValue]);
-
   return (
     <div className={styles.inner}>
       <div className={styles.logo}>
@@ -46,7 +45,7 @@ const SignUp = () => {
           <Logo />
         </Link>
       </div>
-      {statusRegisterUser ? (
+      {statusRegisterUser==='pending' ? (
         <div className={styles.spinner}>
           <Loading />{' '}
         </div>
@@ -118,7 +117,7 @@ const SignUp = () => {
                       password_confirmation: passworConfirmdValue,
                       purchase_code: nameUser,
                     },
-                    callback: () => navigate('/signin'),
+                    callback: (link) => navigate(link),
                   })
                 )
               }

@@ -27,39 +27,39 @@ const Card: React.FC<CardTypeOne> = ({
   const isBookmark =
     cardsFavorites.findIndex((value) => value.id === card.id) > -1;
   return (
-    <div className={styles.card}>
-      <div className={styles.img}>
-        <img src={images}></img>
-      </div>
-      <div>
-        <Link to={`/one-card/${id}`}>
+    <Link to={`/one-card/${id}`}>
+      <div className={styles.card}>
+        <div className={styles.img}>
+          <img src={images}></img>
+        </div>
+        <div>
           <h3 className={styles.title}>{title}</h3>
-        </Link>
-        <ul className={styles.list}>
-          {genre.map((value, index) => (
-            <li className={styles.genre} key={index}>
-              {value}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <span
-        className={classNames(styles.rating, {
-          [styles.ratingOrange]: rating <= 5,
-          [styles.ratingEllow]: rating > 5 && rating <= 7,
-          [styles.ratingGreen]: rating > 7 && rating <= 8.5,
-          [styles.ratingBlue]: rating > 8.5,
-        })}
-      >
-        {rating > 8.5 ? <AiFillFire /> : ''}
-        {rating}
-      </span>
-      {isBookmark && (
-        <span className={styles.favorites}>
-          <BsFillBookmarkFill />
+          <ul className={styles.list}>
+            {genre.map((value, index) => (
+              <li className={styles.genre} key={index}>
+                {value}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <span
+          className={classNames(styles.rating, {
+            [styles.ratingOrange]: rating <= 5,
+            [styles.ratingEllow]: rating > 5 && rating <= 7,
+            [styles.ratingGreen]: rating > 7 && rating <= 8.5,
+            [styles.ratingBlue]: rating > 8.5,
+          })}
+        >
+          {rating > 8.5 ? <AiFillFire /> : ''}
+          {rating}
         </span>
-      )}
-    </div>
+        {isBookmark && (
+          <span className={styles.favorites}>
+            <BsFillBookmarkFill />
+          </span>
+        )}
+      </div>
+    </Link>
   );
 };
 

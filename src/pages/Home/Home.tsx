@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Categories from '../../components/Categories';
 import FilterModal from '../../components/FiltersModal';
 import Footer from '../../components/Footer';
@@ -15,6 +15,9 @@ const Home = () => {
   const svgFilter = useRef(null);
   const dispatch = useAppDispatch();
   const { registered } = useAppSelector((state) => state.signInAuthSlice);
+  const { valueCategories } = useAppSelector((state) => state.categoriesSlice);
+  const { pathname } = useLocation();
+
   useEffect(() => {
     if (registered) {
       dispatch(getUser());
@@ -28,22 +31,25 @@ const Home = () => {
         <Outlet />
         <FilterModal refSvg={svgFilter} />
       </div>
-      <div className={styles.innerSvg} ref={svgFilter}>
-        <AiFillFilter
-          onClick={() => dispatch(setValueModalFilter(true))}
-          className={styles.filterIcon}
-        />
-      </div>
-
-      <div className={styles.innerSvgArrow}>
-        <TfiArrowCircleUp
-          className={styles.arrowIcon}
-          onClick={() =>
-            window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-          }
-        />
-      </div>
-
+      {valueCategories === 0 && pathname === '/' ? (
+        <div className={styles.innerSvg} ref={svgFilter}>
+          <AiFillFilter
+            onClick={() => dispatch(setValueModalFilter(true))}
+            className={styles.filterIcon}
+          />
+        </div>
+      ) : null}
+      {(valueCategories === 0 && pathname === '/') ||
+      (valueCategories === 1 && pathname === '/') ? (
+        <div className={styles.innerSvgArrow}>
+          <TfiArrowCircleUp
+            className={styles.arrowIcon}
+            onClick={() =>
+              window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+            }
+          />
+        </div>
+      ) : null}
       <Footer />
     </>
   );

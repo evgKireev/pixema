@@ -2,7 +2,15 @@ import { RiHome6Fill } from 'react-icons/ri';
 import { AiFillFire } from 'react-icons/ai';
 import { BsFillBookmarkFill } from 'react-icons/bs';
 import { MdSettings } from 'react-icons/md';
-import { getCards, setPage } from '../../redux/cardsSlice';
+import {
+  getCards,
+  setCardsFilter,
+  setCardsRender,
+  setCardsTrend,
+  setCardsTrendRender,
+  setPage,
+  setPageTrends,
+} from '../../redux/cardsSlice';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { setValueCategories } from '../../redux/categoriesSlice';
@@ -51,16 +59,12 @@ const Categories = () => {
                 dispatch(setValueTabs('year'));
                 dispatch(setInputValue(''));
                 dispatch(setUserGenre(''));
-                dispatch(
-                  getCards({
-                    query_term: '',
-                    sort_by: '',
-                    genre: '',
-                    page,
-                    isOverwrite: false,
-                  })
-                );
+                dispatch(setCardsRender([]));
+                dispatch(setCardsFilter([]));
                 dispatch(setPage(1));
+              } else if (item.name === 'Trends') {
+                dispatch(setPageTrends(1));
+                dispatch(setCardsTrendRender([]));
               }
             }}
           >
