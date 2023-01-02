@@ -24,7 +24,7 @@ const Home = () => {
     }
   }, [registered]);
   return (
-    <>
+    <div>
       <Header />
       <div className={styles.inner}>
         <Categories />
@@ -51,7 +51,7 @@ const Home = () => {
         </div>
       ) : null}
       <Footer />
-    </>
+    </div>
   );
 };
 

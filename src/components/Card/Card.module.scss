@@ -30,6 +30,7 @@
 }
 
 .title {
+  font-size: 16px;
   font-weight: 700;
   line-height: 24px;
   cursor: pointer;
@@ -99,5 +100,35 @@
     width: 13.5px;
     height: 18px;
     color: $acsent;
+  }
+}
+
+@media (max-width: 1280px) {
+  .card {
+    width: 208px;
+  }
+  .img {
+    width: 208px;
+    height: 279px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 272px;
+  }
+  .img {
+    width: 272px;
+    height: 365px;
+  }
+}
+
+@media (max-width: 375px) {
+  .card {
+    width: 272px;
+  }
+  .img {
+    width: 272px;
+    height: 365px;
   }
 }

@@ -20,3 +20,21 @@
 .themeWhite {
   background-color: #fff;
 }
+
+@media (max-width: 650px) {
+  .form {
+    padding: 30px;
+    width: 524px;
+  }
+}
+
+@media (max-width: 570px) {
+  .form {
+    padding: 20px;
+    top: 57%;
+    width: 360px;
+  }
+  .title {
+    margin-bottom: 20px;
+  }
+}

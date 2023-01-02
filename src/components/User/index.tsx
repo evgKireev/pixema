@@ -11,6 +11,7 @@ import {
   MdKeyboardArrowUp,
 } from 'react-icons/md';
 import { setValueCategories } from '../../redux/categoriesSlice';
+import Burger from '../Burger';
 
 const User = () => {
   const userActive = ['Edit profile', 'Log Out'];
@@ -43,52 +44,58 @@ const User = () => {
   );
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.inner}>
-        <div className={styles.card}>
+    <>
+      <div className={styles.wrapper}>
+        <div className={styles.inner}>
+          <div className={styles.card}>
+            {registered ? (
+              <h3 style={{ color: 'white' }}>
+                {userInfo?.name[0].toLocaleUpperCase()}
+              </h3>
+            ) : (
+              <FiUser className={styles.svg} />
+            )}
+          </div>
+
+          <div className={styles.user}>
+            {registered ? userInfo?.name : 'Sign in'}
+          </div>
           {registered ? (
-            <h3 style={{ color: 'white' }}>
-              {userInfo?.name[0].toLocaleUpperCase()}
-            </h3>
+            arrow
           ) : (
-            <FiUser className={styles.svg} />
+            <Link to={'signin'}>
+              <MdKeyboardArrowRight className={styles.arrow} />
+            </Link>
           )}
         </div>
-        <div className={styles.user}>
-          {registered ? userInfo?.name : 'Sign in'}
+        <div
+          className={classNames(styles.userActiveInner, {
+            [styles.blockModal]: openModalUser,
+            [styles.themeWhite]: valueTheme,
+          })}
+        >
+          <ul>
+            {userActive.map((value, index) => (
+              <li
+                onClick={() => {
+                  setActiveUser(index);
+                  setOpenModalUser(false);
+                }}
+                className={classNames(styles.item, {
+                  [styles.itemThemeWhite]: valueTheme,
+                })}
+                key={index}
+              >
+                {value}
+              </li>
+            ))}
+          </ul>
         </div>
-        {registered ? (
-          arrow
-        ) : (
-          <Link to={'signin'}>
-            <MdKeyboardArrowRight className={styles.arrow} />
-          </Link>
-        )}
       </div>
-      <div
-        className={classNames(styles.userActiveInner, {
-          [styles.blockModal]: openModalUser,
-          [styles.themeWhite]: valueTheme,
-        })}
-      >
-        <ul>
-          {userActive.map((value, index) => (
-            <li
-              onClick={() => {
-                setActiveUser(index);
-                setOpenModalUser(false);
-              }}
-              className={classNames(styles.item, {
-                [styles.itemThemeWhite]: valueTheme,
-              })}
-              key={index}
-            >
-              {value}
-            </li>
-          ))}
-        </ul>
+      <div className={classNames(styles.wrapperBurger)}>
+        <Burger />
       </div>
-    </div>
+    </>
   );
 };
 

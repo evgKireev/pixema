@@ -93,3 +93,15 @@
 .itemThemeWhite {
   border-bottom: 1px solid #afb2b6;
 }
+
+@media (max-width: 1280px) {
+  .wrapper {
+    display: none;
+  }
+  .userActiveInner {
+    display: none;
+  }
+  .wrapperBurger {
+    display: block;
+  }
+}

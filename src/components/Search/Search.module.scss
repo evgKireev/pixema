@@ -49,3 +49,11 @@
     color: $grey;
   }
 }
+
+@media (max-width: 765px) {
+  .wrapper {
+
+    flex-basis: 100%;
+    order: 1;
+  }
+}

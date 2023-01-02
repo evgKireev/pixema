@@ -7,15 +7,40 @@
   gap: 40px;
 }
 
-.innerBlock{
+.innerBlock {
   width: 100%;
   display: flex;
   gap: 41px;
 }
 
-.logo{
-  width: 263px;
-  margin-right: 40px;
+.logo {
+  min-width: 263px;
 }
 
+@media (max-width: 1280px) {
+  .logo {
+    min-width: 208px;
+  }
+  .inner {
+    gap: 32px;
+  }
+}
 
+@media (max-width: 765px) {
+  .inner {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 400px) {
+  .inner {
+    padding-top: 15px;
+  }
+  .logo {
+    min-width: 152px;
+    svg {
+      width: 152px;
+      height: 39px;
+    }
+  }
+}

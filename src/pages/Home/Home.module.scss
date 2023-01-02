@@ -25,7 +25,6 @@
     color: $acsentLite;
     transition: all 0.5s;
     scale: 1.1;
-
   }
 }
 
@@ -47,3 +46,35 @@
   }
 }
 
+.categoriaInner {
+  display: none;
+}
+
+@media (max-width: 1280px) {
+  .inner {
+    flex-direction: row-reverse;
+  }
+}
+
+@media (max-width: 375px) {
+  .innerSvg {
+    position: fixed;
+    right: 2%;
+    bottom: 2%;
+  }
+
+  .innerSvgArrow {
+    position: fixed;
+    left: 2%;
+    bottom: 2%;
+  }
+  .filterIcon {
+    width: 25px;
+    height: 25px;
+  }
+
+  .arrowIcon {
+    width: 25px;
+    height: 25px;
+  }
+}

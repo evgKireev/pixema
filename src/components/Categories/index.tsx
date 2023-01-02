@@ -6,7 +6,6 @@ import {
   getCards,
   setCardsFilter,
   setCardsRender,
-  setCardsTrend,
   setCardsTrendRender,
   setPage,
   setPageTrends,
@@ -24,8 +23,8 @@ import styles from './Categories.module.scss';
 
 const Categories = () => {
   const { valueCategories } = useAppSelector((state) => state.categoriesSlice);
+  const { valueBuregrMenu } = useAppSelector((state) => state.otherSlice);
   const { registered } = useAppSelector((state) => state.signInAuthSlice);
-  const { page } = useAppSelector((state) => state.cardsSlice);
   const dispatch = useAppDispatch();
   const categories = [
     { name: 'Home', icon: <RiHome6Fill />, link: '/' },
@@ -45,7 +44,7 @@ const Categories = () => {
   ];
   return (
     <>
-      <ul className={styles.inner}>
+      <ul className={classNames(styles.inner, {[styles.innerActive]:valueBuregrMenu})}>
         {categories.map((item, index) => (
           <div
             className={classNames(styles.item, {
