@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
+import { AiOutlineCheck } from 'react-icons/ai';
 import Button, { ButtonTypeEnum } from '../Button';
 import { IoIosClose, IoMdClose } from 'react-icons/io';
 import styles from './FilterModal.module.scss';
@@ -12,7 +13,12 @@ import {
   setUserGenre,
   setValueTabs,
 } from '../../redux/filtersSlice';
-import { getCards, setCardsFilter, setCardsRender, setPage } from '../../redux/cardsSlice';
+import {
+  getCards,
+  setCardsFilter,
+  setCardsRender,
+  setPage,
+} from '../../redux/cardsSlice';
 
 type FilterModalType = {
   refSvg: { current: null };
@@ -21,6 +27,7 @@ type FilterModalType = {
 const FilterModal: React.FC<FilterModalType> = ({ refSvg }) => {
   const [activGenre, setActivGenre] = React.useState<number | null>(null);
   const [openModal, setOpenModal] = React.useState<boolean>(false);
+  const [check, setCheck] = React.useState<boolean>(false);
   const { valueModalFilter } = useAppSelector((state) => state.otherSlice);
   const { valueTabs } = useAppSelector((state) => state.filtersSlice);
   const { inputValue } = useAppSelector((state) => state.filtersSlice);
@@ -234,7 +241,12 @@ const FilterModal: React.FC<FilterModalType> = ({ refSvg }) => {
           </div>
         ))}
       </div>
-
+      <div className={styles.innerCheck}>
+        <div onClick={() => setCheck(!check)} className={styles.btnCheck}>
+          {check ? <AiOutlineCheck /> : null}
+        </div>
+        <div>Rotten Tomatoes rating included</div>
+      </div>
       <div className={styles.btn}>
         <Button
           title={'Clear filter'}

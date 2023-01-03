@@ -1,0 +1,34 @@
+.innerMenu {
+  background-color: #242426;
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
+  height: 100vh;
+  position: absolute;
+  top: 100px;
+  right: 0;
+  transform: translateX(1500px);
+  transition: all 0.5s;
+  padding: 20px;
+  border-radius: 20px;
+}
+.wrapper,
+.userActiveInner {
+  display: block;
+}
+
+@media (max-width: 1280px) {
+  .wrapperBurger {
+    display: none;
+  }
+  .inner {
+    display: block;
+    margin-left: 15px;
+  }
+}
+
+.innerActive {
+  transform: translateX(0);
+  position: fixed;
+  transition: all 0.5s;
+}

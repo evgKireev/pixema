@@ -13,7 +13,12 @@ import {
 import { setValueCategories } from '../../redux/categoriesSlice';
 import Burger from '../Burger';
 
-const User = () => {
+type UserType = {
+  className?: string;
+  classNameTo?: string;
+};
+
+const User: React.FC<UserType> = ({ className, classNameTo }) => {
   const userActive = ['Edit profile', 'Log Out'];
   const [activUser, setActiveUser] = React.useState<number | null>(null);
   const [openModalUser, setOpenModalUser] = React.useState<boolean>(false);
@@ -42,10 +47,9 @@ const User = () => {
       onClick={() => setOpenModalUser(!openModalUser)}
     />
   );
-
   return (
     <>
-      <div className={styles.wrapper}>
+      <div className={classNames(styles.wrapper, className)}>
         <div className={styles.inner}>
           <div className={styles.card}>
             {registered ? (
@@ -69,7 +73,7 @@ const User = () => {
           )}
         </div>
         <div
-          className={classNames(styles.userActiveInner, {
+          className={classNames(styles.userActiveInner, className, {
             [styles.blockModal]: openModalUser,
             [styles.themeWhite]: valueTheme,
           })}
@@ -92,7 +96,7 @@ const User = () => {
           </ul>
         </div>
       </div>
-      <div className={classNames(styles.wrapperBurger)}>
+      <div className={classNames(styles.wrapperBurger, classNameTo)}>
         <Burger />
       </div>
     </>

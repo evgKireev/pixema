@@ -52,18 +52,6 @@
 
 @media (max-width: 1280px) {
   .inner {
-    transform: translateX(1500px);
-    position: absolute;
-    transition: all 0.5s;
-    z-index: 99999;
-    top: 50px;
-  }
-
-  .innerActive {
-    transform: translateX(0);
-    position: fixed;
-    transition: all 0.5s;
-    top: 45px;
-    right: -105px;
+    display: none;
   }
 }

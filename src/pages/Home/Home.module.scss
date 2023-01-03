@@ -1,4 +1,5 @@
 @import '../../scss/vars';
+
 .inner {
   display: flex;
   gap: 40px;
@@ -54,18 +55,15 @@
   .inner {
     flex-direction: row-reverse;
   }
-}
-
-@media (max-width: 375px) {
   .innerSvg {
     position: fixed;
-    right: 2%;
+    right: 1%;
     bottom: 2%;
   }
 
   .innerSvgArrow {
     position: fixed;
-    left: 2%;
+    left: 1%;
     bottom: 2%;
   }
   .filterIcon {

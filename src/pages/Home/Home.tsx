@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { setValueModalFilter } from '../../redux/otherSlice';
 import styles from './Home.module.scss';
 import { getUser } from '../../redux/signInAuthSlice';
+import Menu from '../../components/Menu';
 
 const Home = () => {
   const svgFilter = useRef(null);
@@ -27,9 +28,10 @@ const Home = () => {
     <div>
       <Header />
       <div className={styles.inner}>
-        <Categories />
+        <Categories onClose={()=>{}} />
         <Outlet />
         <FilterModal refSvg={svgFilter} />
+        <Menu />
       </div>
       {valueCategories === 0 && pathname === '/' ? (
         <div className={styles.innerSvg} ref={svgFilter}>

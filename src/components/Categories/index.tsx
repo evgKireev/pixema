@@ -21,7 +21,12 @@ import {
 import classNames from 'classnames';
 import styles from './Categories.module.scss';
 
-const Categories = () => {
+type CategoriesType = {
+  className?: string;
+  onClose: () => void;
+};
+
+const Categories: React.FC<CategoriesType> = ({ className, onClose }) => {
   const { valueCategories } = useAppSelector((state) => state.categoriesSlice);
   const { valueBuregrMenu } = useAppSelector((state) => state.otherSlice);
   const { registered } = useAppSelector((state) => state.signInAuthSlice);
@@ -44,7 +49,7 @@ const Categories = () => {
   ];
   return (
     <>
-      <ul className={classNames(styles.inner, {[styles.innerActive]:valueBuregrMenu})}>
+      <ul className={classNames(styles.inner, className)}>
         {categories.map((item, index) => (
           <div
             className={classNames(styles.item, {
@@ -53,6 +58,7 @@ const Categories = () => {
             })}
             key={index}
             onClick={() => {
+              onClose();
               dispatch(setValueCategories(index));
               if (item.name === 'Home') {
                 dispatch(setValueTabs('year'));
