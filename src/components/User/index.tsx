@@ -16,9 +16,10 @@ import Burger from '../Burger';
 type UserType = {
   className?: string;
   classNameTo?: string;
+  onClose: () => void;
 };
 
-const User: React.FC<UserType> = ({ className, classNameTo }) => {
+const User: React.FC<UserType> = ({ className, classNameTo, onClose }) => {
   const userActive = ['Edit profile', 'Log Out'];
   const [activUser, setActiveUser] = React.useState<number | null>(null);
   const [openModalUser, setOpenModalUser] = React.useState<boolean>(false);
@@ -68,7 +69,10 @@ const User: React.FC<UserType> = ({ className, classNameTo }) => {
             arrow
           ) : (
             <Link to={'signin'}>
-              <MdKeyboardArrowRight className={styles.arrow} />
+              <MdKeyboardArrowRight
+                onClick={onClose}
+                className={styles.arrow}
+              />
             </Link>
           )}
         </div>
@@ -84,6 +88,7 @@ const User: React.FC<UserType> = ({ className, classNameTo }) => {
                 onClick={() => {
                   setActiveUser(index);
                   setOpenModalUser(false);
+                  onClose();
                 }}
                 className={classNames(styles.item, {
                   [styles.itemThemeWhite]: valueTheme,

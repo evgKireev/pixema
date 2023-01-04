@@ -65,3 +65,20 @@
     padding: 48px 0px;
   }
 }
+
+@media (max-width: 578px) {
+  .input {
+    height: 40px;
+    font-size: 12px;
+  }
+  .spanQ {
+    margin-bottom: 25px;
+  }
+  .btn {
+    margin-bottom: 15px;
+    padding: 12px 108px;
+  }
+  .eye {
+    top: 10px;
+  }
+}

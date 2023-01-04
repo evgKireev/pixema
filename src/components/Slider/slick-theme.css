@@ -67,6 +67,7 @@
 
 .slick-prev {
   right: 150px;
+  top: -18px;
 }
 [dir='rtl'] .slick-prev {
   left: -25px;
@@ -81,6 +82,7 @@
 
 .slick-next {
   right: 80px;
+  top: -18px;
 }
 [dir='rtl'] .slick-next {
   right: auto;
@@ -173,4 +175,16 @@
 .slick-dots li.slick-active button:before {
   opacity: 0.75;
   color: black;
+}
+
+@media (max-width: 629px) {
+  .slick-prev {
+    right: 40px;
+    top: -15px; 
+  }
+
+  .slick-next {
+    right: -10px;
+    top: -15px; 
+  }
 }

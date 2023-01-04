@@ -6,7 +6,7 @@ import User from '../User';
 import styles from './Menu.module.scss';
 const Menu = () => {
   const { valueBuregrMenu } = useAppSelector((state) => state.otherSlice);
-const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   return (
     <div
       className={classNames(styles.innerMenu, {
@@ -16,8 +16,12 @@ const dispatch = useAppDispatch()
       <User
         className={classNames(styles.wrapper)}
         classNameTo={styles.wrapperBurger}
+        onClose={() => dispatch(setValueBuregrMenu(!valueBuregrMenu))}
       />
-      <Categories onClose={()=>dispatch(setValueBuregrMenu(!valueBuregrMenu))} className={styles.inner} />
+      <Categories
+        onClose={() => dispatch(setValueBuregrMenu(!valueBuregrMenu))}
+        className={styles.inner}
+      />
     </div>
   );
 };

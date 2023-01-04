@@ -7,6 +7,7 @@ type SearchType = {
   placeholder: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   type?: string;
+  className?: string;
 };
 
 const Input: React.FC<SearchType> = ({
@@ -15,6 +16,7 @@ const Input: React.FC<SearchType> = ({
   placeholder,
   onChange,
   type,
+  className,
 }) => {
   const { valueTheme } = useAppSelector((state) => state.themeSlice);
   return (
@@ -23,7 +25,7 @@ const Input: React.FC<SearchType> = ({
         type={type}
         onChange={onChange}
         placeholder={placeholder}
-        className={classNames(styles.input, {
+        className={classNames(styles.input, className, {
           [styles.disabled]: disabled,
           [styles.error]: error,
           [styles.themeWhite]: valueTheme,

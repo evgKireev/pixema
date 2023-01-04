@@ -70,7 +70,6 @@
 .slick-slide {
   display: none;
   float: left;
-
   height: 100%;
   min-height: 1px;
 }
@@ -102,3 +101,28 @@
 .slick-arrow.slick-hidden {
   display: none;
 }
+
+@media (max-width: 1024px) {
+  .slick-slider {
+    max-width: 800px;
+  }
+}
+@media (max-width: 899px) {
+  .slick-slider {
+    max-width: 500px;
+  }
+}
+@media (max-width: 629px) {
+  .slick-slider {
+    max-width: 300px;
+  }
+
+  
+}
+
+/* 
+    right: 40px;
+    top: -15px; */
+/* 
+    right: -10px;
+    top: -15px; */

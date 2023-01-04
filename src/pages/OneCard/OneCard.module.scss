@@ -1,11 +1,20 @@
 @import '../../scss/vars';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
 .inner {
   display: flex;
   gap: 42px;
 }
 
+.photo {
+  max-width: 500px;
+}
+
 .images {
-  width: 500px;
   border-radius: 20px;
   overflow: hidden;
   margin-bottom: 32px;
@@ -120,8 +129,7 @@
 }
 
 .recomend {
-  padding-top: 40px;
-  display: flex;
+  align-self: flex-end;
   gap: 40px;
 }
 
@@ -152,4 +160,17 @@
 .disabled {
   opacity: 40%;
   pointer-events: none;
+}
+
+@media (max-width: 1024px) {
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: 42px;
+  }
+}
+@media (max-width: 640px) {
+  .recomend {
+    align-self: flex-start;
+  }
 }

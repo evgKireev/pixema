@@ -14,8 +14,8 @@ const Header = () => {
       <div className={styles.logo}>
         <Link to={'/'}>{valueTheme ? <LogoWhite /> : <Logo />}</Link>
       </div>
-        <Search />
-        <User />
+      <Search />
+      <User onClose={() => {}} />
     </div>
   );
 };

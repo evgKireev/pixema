@@ -44,6 +44,7 @@ const SignIn = () => {
               <div>
                 <span>Email</span>
                 <Input
+                  className={styles.input}
                   onChange={(e) => dispach(setMailValue(e.target.value))}
                   disabled={false}
                   error={false}
@@ -54,6 +55,7 @@ const SignIn = () => {
                 <span>Password</span>
                 <div className={styles.innerInp}>
                   <Input
+                    className={styles.input}
                     onChange={(e) => dispach(setPasswordValue(e.target.value))}
                     disabled={false}
                     error={false}

@@ -13,13 +13,27 @@ type MultipleItemsType = {
 
 const MultipleItems: React.FC<MultipleItemsType> = ({ cards }) => {
   const { statusSuggestions } = useAppSelector((state) => state.cardsSlice);
+  const widthWindow = window.innerWidth;
+
+  const slidesToShow = () => {
+    if (widthWindow < 900 && widthWindow > 630) {
+      return 2;
+    } else if (widthWindow < 630) {
+      return 1;
+    } else {
+      return 3;
+    }
+  };
+
+  console.log(slidesToShow());
   const settings = {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 2,
+    slidesToShow: slidesToShow(),
+    slidesToScroll: 1,
   };
+
   return (
     <div>
       <Slider {...settings}>

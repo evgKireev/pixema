@@ -45,7 +45,7 @@ const SignUp = () => {
           <Logo />
         </Link>
       </div>
-      {statusRegisterUser==='pending' ? (
+      {statusRegisterUser === 'pending' ? (
         <div className={styles.spinner}>
           <Loading />{' '}
         </div>
@@ -56,6 +56,7 @@ const SignUp = () => {
               <div>
                 <span>Email</span>
                 <Input
+                  className={styles.input}
                   onChange={(e) => dispatch(setMailValue(e.target.value))}
                   disabled={false}
                   error={false}
@@ -66,6 +67,7 @@ const SignUp = () => {
                 <span>Password</span>
                 <div className={styles.innerInp}>
                   <Input
+                    className={styles.input}
                     onChange={(e) => dispatch(setPasswordValue(e.target.value))}
                     disabled={false}
                     error={false}
@@ -85,6 +87,7 @@ const SignUp = () => {
                 <span>Confirm password</span>
                 <div className={styles.innerInp}>
                   <Input
+                    className={styles.input}
                     onChange={(e) =>
                       dispatch(setPassworConfirmdValue(e.target.value))
                     }

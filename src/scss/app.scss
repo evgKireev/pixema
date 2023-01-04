@@ -22,6 +22,12 @@ body {
   background-size: cover;
   background-position: center;
   transition: none;
+  @media (max-width: 578px) {
+    .conatiner {
+      padding: 0 10px;
+    }
+  }
+ 
 }
 
 .bodyWhite {
@@ -54,8 +60,6 @@ body {
     padding: 0 50px;
   }
 }
-
-
 
 @media (max-width: 375px) {
   .conatiner {

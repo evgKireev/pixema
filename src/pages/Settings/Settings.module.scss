@@ -71,3 +71,29 @@
   background-color: #fff;
   border: 1px solid #afb2b6;
 }
+
+@media (max-width: 750px) {
+  .innerProfile {
+    flex-direction: column;
+    gap: 40px;
+    padding: 52px 30px 30px 30px;
+    margin-bottom: 40px;
+  }
+  .innerPassword {
+    flex-direction: column;
+    padding: 40px;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 660px) {
+  .buttonInner {
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 48px;
+  }
+  .innerProfile {
+    gap: 30px;
+  }
+}
