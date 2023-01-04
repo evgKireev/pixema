@@ -204,7 +204,6 @@
   min-height: 100px;
   border-radius: 10px;
   padding: 12px;
-  margin-bottom: 20px;
 }
 
 .genreSel {
@@ -233,7 +232,6 @@
 
 .innerCheck {
   height: 50px;
-  margin-bottom: 100px;
   display: flex;
   gap: 20px;
 }
@@ -262,6 +260,38 @@
   opacity: 60%;
 }
 
+@media (max-height: 935px) {
+  .inner {
+    padding: 30px 30px;
+    gap: 20px;
+  }
+}
+
+@media (max-height: 935px) {
+  .inner {
+    padding: 17px 42px;
+    gap: 20px;
+  }
+  .buttonLeft,
+  .buttonRigth {
+    padding: 10px 5px;
+  }
+  .sort {
+    padding-bottom: 15px;
+  }
+  .input {
+    padding: 10px 50px 10px 20px;
+  }
+  .innerCheck {
+    height: 25px;
+  }
+  .btnFilter {
+    padding: 10px 50px 10px 51px;
+  }
+}
+@media (max-height: 680px) {
+}
+
 @media (max-width: 500px) {
   .inner {
     padding: 25px 35px;
@@ -276,7 +306,7 @@
     padding: 20px 30px;
   }
   .inner {
-    width: 400px;
+    width: 100vw;
     padding: 35px 25px;
     gap: 30px;
   }
@@ -284,7 +314,7 @@
     width: 350px;
     height: 250px;
   }
- 
+
   .sort {
     padding-bottom: 25px;
   }
@@ -318,9 +348,7 @@
     font-size: 14px;
     padding: 15px 29px;
   }
-  .inner {
-    width: 320px;
-  }
+ 
 }
 
 @media (max-width: 380px) {

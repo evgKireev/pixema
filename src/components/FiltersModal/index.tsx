@@ -289,6 +289,7 @@ const FilterModal: React.FC<FilterModalType> = ({ refSvg }) => {
             );
             dispatch(setPage(1));
             setDisabled(true);
+            dispatch(setValueModalFilter(false));
           }}
           disabled={disabled}
           className={styles.btnFilter}

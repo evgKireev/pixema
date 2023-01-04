@@ -24,11 +24,12 @@ const Home = () => {
       dispatch(getUser());
     }
   }, [registered]);
+
   return (
     <div>
       <Header />
       <div className={styles.inner}>
-        <Categories onClose={()=>{}} />
+        <Categories onClose={() => {}} />
         <Outlet />
         <FilterModal refSvg={svgFilter} />
         <Menu />
