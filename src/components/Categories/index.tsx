@@ -54,6 +54,7 @@ const Categories: React.FC<CategoriesType> = ({ className, onClose }) => {
           <div
             className={classNames(styles.item, {
               [styles.active]: valueCategories === index,
+              
               [styles.disabled]: item.disabled === registered,
             })}
             key={index}
