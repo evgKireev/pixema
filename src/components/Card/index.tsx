@@ -1,19 +1,19 @@
-import classNames from 'classnames';
-import { BsFillBookmarkFill } from 'react-icons/bs';
-import { AiFillFire } from 'react-icons/ai';
-import styles from './Card.module.scss';
-import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../redux/hooks';
-import { CardType } from '../../@types/types/cards';
+import classNames from 'classnames'
+import { BsFillBookmarkFill } from 'react-icons/bs'
+import { AiFillFire } from 'react-icons/ai'
+import styles from './Card.module.scss'
+import { Link } from 'react-router-dom'
+import { useAppSelector } from '../../redux/hooks'
+import { CardType } from '../../@types/types/cards'
 
 type CardTypeOne = {
-  images: string;
-  title: string;
-  genre: string[];
-  rating: number;
-  id: number;
-  card: CardType;
-};
+  images: string
+  title: string
+  genre: string[]
+  rating: number
+  id: number
+  card: CardType
+}
 
 const Card: React.FC<CardTypeOne> = ({
   images,
@@ -23,9 +23,9 @@ const Card: React.FC<CardTypeOne> = ({
   id,
   card,
 }) => {
-  const { cardsFavorites } = useAppSelector((state) => state.cardsSlice);
+  const { cardsFavorites } = useAppSelector((state) => state.cardsSlice)
   const isBookmark =
-    cardsFavorites.findIndex((value) => value.id === card.id) > -1;
+    cardsFavorites.findIndex((value) => value.id === card.id) > -1
   return (
     <Link to={`/one-card/${id}`}>
       <div className={styles.card}>
@@ -35,8 +35,11 @@ const Card: React.FC<CardTypeOne> = ({
         <div>
           <h3 className={styles.title}>{title}</h3>
           <ul className={styles.list}>
-            {genre.map((value, index) => (
-              <li className={styles.genre} key={index}>
+            {genre?.map((value, index) => (
+              <li
+                className={styles.genre}
+                key={index}
+              >
                 {value}
               </li>
             ))}
@@ -60,7 +63,7 @@ const Card: React.FC<CardTypeOne> = ({
         )}
       </div>
     </Link>
-  );
-};
+  )
+}
 
-export default Card;
+export default Card
